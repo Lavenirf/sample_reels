@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+     "i-button": "/components/dist/button/index",
+     "i-radio-group": "/components/dist/radio-group/index",
+     "i-radio": "/components/dist/radio/index",
+     "i-input": "/components/dist/input/index",
+     "i-badge": "/components/dist/badge/index",
+     "i-tabs": "/components/dist/tabs/index",
+     "i-tab": "/components/dist/tab/index",
+     "i-load-more": "/components/dist/load-more/index"
+  },
+  "navigationStyle": "custom"
+}

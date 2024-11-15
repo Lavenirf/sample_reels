@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gk.mapper.EnrollmentPlanMapper">
+
+    <resultMap type="com.ruoyi.gk.domain.EnrollmentPlan" id="EnrollmentPlanResult">
+        <result property="schoolId"    column="school_id"    />
+        <result property="id"    column="id"    />
+        <result property="specialId"    column="special_id"    />
+        <result property="year"    column="year"    />
+        <result property="area"    column="area"    />
+        <result property="num"    column="num"    />
+        <result property="length"    column="length"    />
+        <result property="tuition"    column="tuition"    />
+        <result property="level1Name"    column="level1_name"    />
+        <result property="level2Name"    column="level2_name"    />
+        <result property="level3Name"    column="level3_name"    />
+        <result property="spcode"    column="spcode"    />
+        <result property="spname"    column="spname"    />
+        <result property="spInfo"    column="sp_info"    />
+        <result property="localBatchName"    column="local_batch_name"    />
+        <result property="zslxName"    column="zslx_name"    />
+    </resultMap>
+    <resultMap type="com.ruoyi.gk.domain.vo.EnrollmentPlanVo" id="EnrollmentPlanResultVo">
+        <result property="mcid"    column="mcid"    />
+        <result property="specialId"    column="special_id"    />
+        <result property="year"    column="year"    />
+        <result property="num"    column="num"    />
+        <result property="minSection"    column="min_section"    />
+        <result property="min"    column="min"    />
+        <result property="spname"    column="spname"    />
+        <result property="localProvinceName"    column="local_province_name"    />
+        <result property="spInfo"    column="sp_info"    />
+        <result property="length"    column="length"    />
+        <result property="tuition"    column="tuition"    />
+    </resultMap>
+
+    <sql id="selectEnrollmentPlanVo">
+        select sp_info,id, school_id, special_id, `year`, area, num, length, tuition, level1_name,
+               level2_name, level3_name, spcode, spname, local_batch_name, zslx_name from enrollment_plan
+    </sql>
+
+    <select id="selectEnrollmentPlanList" parameterType="com.ruoyi.gk.domain.EnrollmentPlan" resultMap="EnrollmentPlanResult">
+        <include refid="selectEnrollmentPlanVo"/>
+        <where>
+            <if test="specialId != null  and specialId != ''"> and special_id = #{specialId}</if>
+            <if test="schoolId != null  and schoolId != ''"> and school_id = #{schoolId}</if>
+            <if test="year != null  and year != ''"> and `year` = #{year}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+        </where>
+    </select>
+    <!--plan无数据，暂时用s-->
+    <select id="selectEnrollmentPlanGapList" parameterType="com.ruoyi.gk.domain.vo.EnrollmentPlanVo" resultMap="EnrollmentPlanResultVo">
+        SELECT s.mcid,s.min,s.min_section,s.spname,plan.num,s.`year`,s.special_id,plan.sp_info,plan.length,plan.tuition
+        FROM `school_major_scores` s
+        LEFT JOIN enrollment_plan plan  ON s.special_id=plan.special_id
+        <where>
+            <if test="specialId != null  and specialId != ''">  s.special_id=#{specialId}</if>
+            <if test="localProvinceName != null  and localProvinceName != ''"> and  s.local_province_name= #{localProvinceName}</if>
+            <if test="spname != null  and spname != ''"> and s.spname =#{spname}</if>
+            <if test="year != null  and year != ''"> and plan.year =#{year}</if>
+            <if test="year != null  and year != ''"> and s.year =#{year}</if>
+        </where>
+    </select>
+
+    <select id="selectEnrollmentPlanGapListBatch" parameterType="map" resultMap="EnrollmentPlanResultVo">
+        SELECT
+        s.mcid, s.min, s.min_section, s.spname,
+        plan.num, s.`year`, s.special_id,
+        plan.sp_info, plan.length, plan.tuition
+        FROM `school_major_scores` s
+
+        LEFT JOIN enrollment_plan plan ON s.special_id = plan.special_id
+        <where>
+            <if test="specialIds != null and specialIds.size() > 0">
+                AND s.special_id IN
+                <foreach item="item" index="index" collection="specialIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="localProvinceName != null and localProvinceName != ''">
+                AND s.local_province_name = #{localProvinceName}
+            </if>
+            <if test="spnames != null and spnames.size() > 0">
+                AND s.spname IN
+                <foreach item="item" index="index" collection="spnames" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="years != null and years.size() > 0">
+                AND plan.year IN
+                <foreach item="item" index="index" collection="years" open="(" separator="," close=")">
+
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+
+    </select>
+
+
+    <select id="selectEnrollmentPlanBySchoolId" parameterType="String" resultMap="EnrollmentPlanResult">
+        <include refid="selectEnrollmentPlanVo"/>
+        where school_id = #{schoolId}
+    </select>
+
+    <insert id="insertEnrollmentPlan" parameterType="com.ruoyi.gk.domain.EnrollmentPlan">
+        insert into enrollment_plan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="schoolId != null">school_id,</if>
+            <if test="specialId != null">special_id,</if>
+            <if test="year != null">`year`,</if>
+            <if test="area != null">area,</if>
+            <if test="num != null">num,</if>
+            <if test="length != null">length,</if>
+            <if test="tuition != null">tuition,</if>
+            <if test="level1Name != null">level1_name,</if>
+            <if test="level2Name != null">level2_name,</if>
+            <if test="level3Name != null">level3_name,</if>
+            <if test="spcode != null">spcode,</if>
+            <if test="spname != null">spname,</if>
+            <if test="localBatchName != null">local_batch_name,</if>
+            <if test="zslxName != null">zslx_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="schoolId != null">#{schoolId},</if>
+            <if test="specialId != null">#{specialId},</if>
+            <if test="year != null">#{year},</if>
+            <if test="area != null">#{area},</if>
+            <if test="num != null">#{num},</if>
+            <if test="length != null">#{length},</if>
+            <if test="tuition != null">#{tuition},</if>
+            <if test="level1Name != null">#{level1Name},</if>
+            <if test="level2Name != null">#{level2Name},</if>
+            <if test="level3Name != null">#{level3Name},</if>
+            <if test="spcode != null">#{spcode},</if>
+            <if test="spname != null">#{spname},</if>
+            <if test="localBatchName != null">#{localBatchName},</if>
+            <if test="zslxName != null">#{zslxName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateEnrollmentPlan" parameterType="com.ruoyi.gk.domain.EnrollmentPlan">
+        update enrollment_plan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="specialId != null">special_id = #{specialId},</if>
+            <if test="year != null">`year` = #{year},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="length != null">length = #{length},</if>
+            <if test="tuition != null">tuition = #{tuition},</if>
+            <if test="level1Name != null">level1_name = #{level1Name},</if>
+            <if test="level2Name != null">level2_name = #{level2Name},</if>
+            <if test="level3Name != null">level3_name = #{level3Name},</if>
+            <if test="spcode != null">spcode = #{spcode},</if>
+            <if test="spname != null">spname = #{spname},</if>
+            <if test="localBatchName != null">local_batch_name = #{localBatchName},</if>
+            <if test="zslxName != null">zslx_name = #{zslxName},</if>
+        </trim>
+        where school_id = #{schoolId}
+    </update>
+
+    <delete id="deleteEnrollmentPlanBySchoolId" parameterType="String">
+        delete from enrollment_plan where school_id = #{schoolId}
+    </delete>
+
+    <delete id="deleteEnrollmentPlanBySchoolIds" parameterType="String">
+        delete from enrollment_plan where school_id in
+        <foreach item="schoolId" collection="array" open="(" separator="," close=")">
+            #{schoolId}
+        </foreach>
+    </delete>
+</mapper>

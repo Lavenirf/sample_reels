@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gk.mapper.SchoolMajorScoresMapper">
+
+    <resultMap type="com.ruoyi.gk.domain.SchoolMajorScores" id="SchoolMajorScoresResult">
+        <result property="mcid"    column="mcid"    />
+        <result property="average"    column="average"    />
+        <result property="firstKm"    column="first_km"    />
+        <result property="isScoreRange"    column="is_score_range"    />
+        <result property="isTop"    column="is_top"    />
+        <result property="level2Name"    column="level2_name"    />
+        <result property="level3Name"    column="level3_name"    />
+        <result property="localBatchName"    column="local_batch_name"    />
+        <result property="localProvinceName"    column="local_province_name"    />
+        <result property="localTypeName"    column="local_type_name"    />
+        <result property="max"    column="max"    />
+        <result property="min"    column="min"    />
+<!--        <result property="minRange"    column="min_range"    />
+        <result property="minRankRange"    column="min_rank_range"    />-->
+        <result property="minSection"    column="min_section"    />
+        <result property="name"    column="name"    />
+        <result property="proscore"    column="proscore"    />
+        <result property="schoolId"    column="school_id"    />
+        <result property="sgFxk"    column="sg_fxk"    />
+        <result property="sgInfo"    column="sg_info"    />
+        <result property="sgName"    column="sg_name"    />
+        <result property="sgSxk"    column="sg_sxk"    />
+        <result property="sgType"    column="sg_type"    />
+        <result property="spFxk"    column="sp_fxk"    />
+        <result property="spInfo"    column="sp_info"    />
+        <result property="spSxk"    column="sp_sxk"    />
+        <result property="spType"    column="sp_type"    />
+        <result property="speId"    column="spe_id"    />
+        <result property="specialGroup"    column="special_group"    />
+        <result property="specialId"    column="special_id"    />
+        <result property="spname"    column="spname"    />
+        <result property="year"    column="year"    />
+        <result property="zslxName"    column="zslx_name"    />
+    </resultMap>
+
+    <sql id="selectSchoolMajorScoresVo">
+        select mcid, average, first_km, is_score_range, is_top, level2_name, level3_name, local_batch_name, local_province_name, local_type_name, max, min,  min_section, name, proscore, school_id, sg_fxk, sg_info, sg_name, sg_sxk, sg_type, sp_fxk, sp_info, sp_sxk, sp_type, spe_id, special_group, special_id, spname, year, zslx_name from school_major_scores
+    </sql>
+
+    <select id="selectSchoolMajorScoresList" parameterType="com.ruoyi.gk.domain.SchoolMajorScores" resultMap="SchoolMajorScoresResult">
+        <include refid="selectSchoolMajorScoresVo"/>
+        <where>
+            <if test="average != null and average != ''"> AND average = #{average}</if>
+            <if test="firstKm != null"> AND first_km = #{firstKm}</if>
+            <if test="isScoreRange != null"> AND is_score_range = #{isScoreRange}</if>
+            <if test="isTop != null"> AND is_top = #{isTop}</if>
+            <if test="level2Name != null and level2Name != ''"> AND level2_name = #{level2Name}</if>
+            <if test="level3Name != null and level3Name != ''"> AND level3_name = #{level3Name}</if>
+            <if test="localBatchName != null and localBatchName != ''"> AND local_batch_name = #{localBatchName}</if>
+            <if test="localProvinceName != null and localProvinceName != ''"> AND local_province_name = #{localProvinceName}</if>
+            <if test="localTypeName != null and localTypeName != ''"> AND local_type_name = #{localTypeName}</if>
+            <if test="max != null and max != ''"> AND max = #{max}</if>
+            <if test="min != null and min != ''"> AND min = #{min}</if>
+            <if test="minSection != null"> AND min_section = #{minSection}</if>
+            <if test="name != null and name != ''"> AND `name` = #{name}</if>
+            <if test="proscore != null and proscore != ''"> AND proscore = #{proscore}</if>
+            <if test="schoolId != null"> AND school_id = #{schoolId}</if>
+            <if test="sgFxk != null and sgFxk != ''"> AND sg_fxk = #{sgFxk}</if>
+            <if test="sgInfo != null and sgInfo != ''"> AND sg_info = #{sgInfo}</if>
+            <if test="sgName != null and sgName != ''"> AND sg_name = #{sgName}</if>
+            <if test="sgSxk != null and sgSxk != ''"> AND sg_sxk = #{sgSxk}</if>
+            <if test="sgType != null"> AND sg_type = #{sgType}</if>
+            <if test="spFxk != null and spFxk != ''"> AND sp_fxk = #{spFxk}</if>
+            <if test="spInfo != null and spInfo != ''"> AND sp_info = #{spInfo}</if>
+            <if test="spSxk != null and spSxk != ''"> AND sp_sxk = #{spSxk}</if>
+            <if test="spType != null"> AND sp_type = #{spType}</if>
+            <if test="speId != null"> AND spe_id = #{speId}</if>
+            <if test="specialGroup != null"> AND special_group = #{specialGroup}</if>
+            <if test="specialId != null"> AND special_id = #{specialId}</if>
+            <if test="spname != null and spname != ''"> AND spname = #{spname}</if>
+            <if test="year != null"> AND `year` = #{year}</if>
+            <if test="zslxName != null and zslxName != ''"> AND zslx_name = #{zslxName}</if>
+        </where>
+    </select>
+
+
+    <select id="selectSchoolMajorScoresByMcid" parameterType="Long" resultMap="SchoolMajorScoresResult">
+        <include refid="selectSchoolMajorScoresVo"/>
+        where mcid = #{mcid}
+    </select>
+
+    <insert id="insertSchoolMajorScores" parameterType="com.ruoyi.gk.domain.SchoolMajorScores" useGeneratedKeys="true" keyProperty="mcid">
+        insert into school_major_scores
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="average != null">average,</if>
+            <if test="firstKm != null">first_km,</if>
+            <if test="isScoreRange != null">is_score_range,</if>
+            <if test="isTop != null">is_top,</if>
+            <if test="level2Name != null">level2_name,</if>
+            <if test="level3Name != null">level3_name,</if>
+            <if test="localBatchName != null">local_batch_name,</if>
+            <if test="localProvinceName != null">local_province_name,</if>
+            <if test="localTypeName != null">local_type_name,</if>
+            <if test="max != null">max,</if>
+            <if test="min != null">min,</if>
+            <if test="minSection != null">min_section,</if>
+            <if test="name != null">`name`,</if>
+            <if test="proscore != null">proscore,</if>
+            <if test="schoolId != null">school_id,</if>
+            <if test="sgFxk != null">sg_fxk,</if>
+            <if test="sgInfo != null">sg_info,</if>
+            <if test="sgName != null">sg_name,</if>
+            <if test="sgSxk != null">sg_sxk,</if>
+            <if test="sgType != null">sg_type,</if>
+            <if test="spFxk != null">sp_fxk,</if>
+            <if test="spInfo != null">sp_info,</if>
+            <if test="spSxk != null">sp_sxk,</if>
+            <if test="spType != null">sp_type,</if>
+            <if test="speId != null">spe_id,</if>
+            <if test="specialGroup != null">special_group,</if>
+            <if test="specialId != null">special_id,</if>
+            <if test="spname != null">spname,</if>
+            <if test="year != null">`year`,</if>
+            <if test="zslxName != null">zslx_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="average != null">#{average},</if>
+            <if test="firstKm != null">#{firstKm},</if>
+            <if test="isScoreRange != null">#{isScoreRange},</if>
+            <if test="isTop != null">#{isTop},</if>
+            <if test="level2Name != null">#{level2Name},</if>
+            <if test="level3Name != null">#{level3Name},</if>
+            <if test="localBatchName != null">#{localBatchName},</if>
+            <if test="localProvinceName != null">#{localProvinceName},</if>
+            <if test="localTypeName != null">#{localTypeName},</if>
+            <if test="max != null">#{max},</if>
+            <if test="min != null">#{min},</if>
+            <if test="minSection != null">#{minSection},</if>
+            <if test="name != null">#{name},</if>
+            <if test="proscore != null">#{proscore},</if>
+            <if test="schoolId != null">#{schoolId},</if>
+            <if test="sgFxk != null">#{sgFxk},</if>
+            <if test="sgInfo != null">#{sgInfo},</if>
+            <if test="sgName != null">#{sgName},</if>
+            <if test="sgSxk != null">#{sgSxk},</if>
+            <if test="sgType != null">#{sgType},</if>
+            <if test="spFxk != null">#{spFxk},</if>
+            <if test="spInfo != null">#{spInfo},</if>
+            <if test="spSxk != null">#{spSxk},</if>
+            <if test="spType != null">#{spType},</if>
+            <if test="speId != null">#{speId},</if>
+            <if test="specialGroup != null">#{specialGroup},</if>
+            <if test="specialId != null">#{specialId},</if>
+            <if test="spname != null">#{spname},</if>
+            <if test="year != null">#{year},</if>
+            <if test="zslxName != null">#{zslxName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSchoolMajorScores" parameterType="com.ruoyi.gk.domain.SchoolMajorScores">
+        update school_major_scores
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="average != null">average = #{average},</if>
+            <if test="firstKm != null">first_km = #{firstKm},</if>
+            <if test="isScoreRange != null">is_score_range = #{isScoreRange},</if>
+            <if test="isTop != null">is_top = #{isTop},</if>
+            <if test="level2Name != null">level2_name = #{level2Name},</if>
+            <if test="level3Name != null">level3_name = #{level3Name},</if>
+            <if test="localBatchName != null">local_batch_name = #{localBatchName},</if>
+            <if test="localProvinceName != null">local_province_name = #{localProvinceName},</if>
+            <if test="localTypeName != null">local_type_name = #{localTypeName},</if>
+            <if test="max != null">max = #{max},</if>
+            <if test="min != null">min = #{min},</if>
+            <if test="minSection != null">min_section = #{minSection},</if>
+            <if test="name != null">`name`= #{name},</if>
+            <if test="proscore != null">proscore = #{proscore},</if>
+            <if test="schoolId != null">school_id = #{schoolId},</if>
+            <if test="sgFxk != null">sg_fxk = #{sgFxk},</if>
+            <if test="sgInfo != null">sg_info = #{sgInfo},</if>
+            <if test="sgName != null">sg_name = #{sgName},</if>
+            <if test="sgSxk != null">sg_sxk = #{sgSxk},</if>
+            <if test="sgType != null">sg_type = #{sgType},</if>
+            <if test="spFxk != null">sp_fxk = #{spFxk},</if>
+            <if test="spInfo != null">sp_info = #{spInfo},</if>
+            <if test="spSxk != null">sp_sxk = #{spSxk},</if>
+            <if test="spType != null">sp_type = #{spType},</if>
+            <if test="speId != null">spe_id = #{speId},</if>
+            <if test="specialGroup != null">special_group = #{specialGroup},</if>
+            <if test="specialId != null">special_id = #{specialId},</if>
+            <if test="spname != null">spname = #{spname},</if>
+            <if test="year != null">`year` = #{year},</if>
+            <if test="zslxName != null">zslx_name = #{zslxName},</if>
+        </trim>
+        where mcid = #{mcid}
+    </update>
+
+    <delete id="deleteSchoolMajorScoresByMcid" parameterType="Long">
+        delete from school_major_scores where mcid = #{mcid}
+    </delete>
+
+    <delete id="deleteSchoolMajorScoresByMcids" parameterType="String">
+        delete from school_major_scores where mcid in
+        <foreach item="mcid" collection="array" open="(" separator="," close=")">
+            #{mcid}
+        </foreach>
+    </delete>
+
+    <select id="selectSchoolMajorScoresListBySchoolIds" resultType="com.ruoyi.gk.domain.SchoolMajorScores" resultMap="SchoolMajorScoresResult">
+        SELECT * FROM school_major_scores
+        WHERE 1 = 1
+        <if test="schoolIds != null and schoolIds.size() > 0">
+            AND school_id IN
+            <foreach item="item" index="index" collection="schoolIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="localProvinceName != null">
+            AND local_province_name = #{localProvinceName}
+        </if>
+        <if test="level2Name != null">
+            AND level2_name = #{level2Name}
+        </if>
+    </select>
+</mapper>

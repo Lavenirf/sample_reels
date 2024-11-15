@@ -1,0 +1,22 @@
+server:
+  port: 5000
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://my_mysql:3306/lab_system
+    username: root
+    password: 123456
+  data:
+    redis:
+      port: 6379
+      host: localhost
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+config:
+  jwt:
+    TOKEN_SECRET: f26e587c28064d0e855e72c0a6a0e631
+    EXPIRE_TIME: 3600
+    HEADER: Authorization

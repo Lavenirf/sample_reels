@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.core.mapper.ScoreMapper">
+
+    <resultMap type="com.core.entity.Score" id="ScoreResult">
+        <result property="id" column="id"/>
+        <result property="clazzId" column="clazz_id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="examId" column="exam_id"/>
+        <result property="score" column="score"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <sql id="selectScoreVo">
+        select id, clazz_id, student_id, exam_id, score, status, create_time from score
+    </sql>
+
+    <select id="selectScoreList" parameterType="com.core.entity.Score" resultMap="ScoreResult">
+        <include refid="selectScoreVo"/>
+        <where>
+            <if test="clazzId != null ">
+                and clazz_id = #{clazzId}
+            </if>
+            <if test="studentId != null ">
+                and student_id = #{studentId}
+            </if>
+            <if test="examId != null ">
+                and exam_id = #{examId}
+            </if>
+            <if test="score != null ">
+                and score = #{score}
+            </if>
+            <if test="status != null ">
+                and status = #{status}
+            </if>
+            <if test="createTime != null ">
+                and create_time = #{createTime}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectScoreById" parameterType="Long" resultMap="ScoreResult">
+        <include refid="selectScoreVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertScore" parameterType="com.core.entity.Score" useGeneratedKeys="true" keyProperty="id">
+        insert into score
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="clazzId != null">
+                clazz_id,
+            </if>
+            <if test="studentId != null">
+                student_id,
+            </if>
+            <if test="examId != null">
+                exam_id,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="clazzId != null">
+                #{clazzId},
+            </if>
+            <if test="studentId != null">
+                #{studentId},
+            </if>
+            <if test="examId != null">
+                #{examId},
+            </if>
+            <if test="score != null">
+                #{score},
+            </if>
+            <if test="status != null">
+                #{status},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateScore" parameterType="com.core.entity.Score">
+        update score
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="clazzId != null">
+                clazz_id = #{clazzId},
+            </if>
+            <if test="studentId != null">
+                student_id = #{studentId},
+            </if>
+            <if test="examId != null">
+                exam_id = #{examId},
+            </if>
+            <if test="score != null">
+                score = #{score},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteScoreById" parameterType="Long">
+        delete from score where id = #{id}
+    </delete>
+
+    <delete id="deleteScoreByIds" parameterType="String">
+        delete from score where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

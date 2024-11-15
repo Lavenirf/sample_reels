@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gk.mapper.SchoolScoresMapper">
+
+    <resultMap type="com.ruoyi.gk.domain.SchoolScores" id="SchoolScoresResult">
+        <result property="id"    column="id"    />
+        <result property="answerurl"    column="answerurl"    />
+        <result property="average"    column="average"    />
+        <result property="avgSection"    column="avg_section"    />
+        <result property="cityName"    column="city_name"    />
+        <result property="countyName"    column="county_name"    />
+        <result property="dualClass"    column="dual_class"    />
+        <result property="dualClassName"    column="dual_class_name"    />
+        <result property="filing"    column="filing"    />
+        <result property="firstKm"    column="first_km"    />
+        <result property="localBatchId"    column="local_batch_id"    />
+        <result property="localBatchName"    column="local_batch_name"    />
+        <result property="localProvinceName"    column="local_province_name"    />
+        <result property="localTypeName"    column="local_type_name"    />
+        <result property="max"    column="max"    />
+        <result property="min"    column="min"    />
+        <result property="minSection"    column="min_section"    />
+        <result property="name"    column="name"    />
+        <result property="natureName"    column="nature_name"    />
+        <result property="num"    column="num"    />
+        <result property="proscore"    column="proscore"    />
+        <result property="provinceId"    column="province_id"    />
+        <result property="provinceName"    column="province_name"    />
+        <result property="schoolId"    column="school_id"    />
+        <result property="sgFxk"    column="sg_fxk"    />
+        <result property="sgInfo"    column="sg_info"    />
+        <result property="sgName"    column="sg_name"    />
+        <result property="sgSxk"    column="sg_sxk"    />
+        <result property="sgType"    column="sg_type"    />
+        <result property="specialGroup"    column="special_group"    />
+        <result property="xclevelName"    column="xclevel_name"    />
+        <result property="year"    column="year"    />
+        <result property="zslxName"    column="zslx_name"    />
+    </resultMap>
+
+    <sql id="selectSchoolScoresVo">
+        select id, answerurl, average, avg_section, city_name, county_name, dual_class, dual_class_name, filing, first_km, local_batch_id, local_batch_name, local_province_name, local_type_name,  max, min, min_section, name, nature_name, num, proscore, province_id, province_name, school_id, sg_fxk, sg_info, sg_name, sg_sxk, sg_type, special_group, xclevel_name, year, zslx_name from school_scores
+    </sql>
+
+    <select id="selectSchoolScoresList" parameterType="com.ruoyi.gk.domain.SchoolScores" resultMap="SchoolScoresResult">
+        <include refid="selectSchoolScoresVo"/>
+        <where>
+            <if test="answerurl != null  and answerurl != ''"> and answerurl = #{answerurl}</if>
+            <if test="average != null  and average != ''"> and average = #{average}</if>
+            <if test="avgSection != null  and avgSection != ''"> and avg_section = #{avgSection}</if>
+            <if test="cityName != null  and cityName != ''"> and city_name like concat('%', #{cityName}, '%')</if>
+            <if test="countyName != null  and countyName != ''"> and county_name like concat('%', #{countyName}, '%')</if>
+            <if test="dualClass != null "> and dual_class = #{dualClass}</if>
+            <if test="dualClassName != null  and dualClassName != ''"> and dual_class_name like concat('%', #{dualClassName}, '%')</if>
+            <if test="filing != null "> and filing = #{filing}</if>
+            <if test="firstKm != null "> and first_km = #{firstKm}</if>
+            <if test="localBatchId != null  and localBatchId != ''"> and local_batch_id = #{localBatchId}</if>
+            <if test="localBatchName != null  and localBatchName != ''"> and local_batch_name like concat('%', #{localBatchName}, '%')</if>
+            <if test="localProvinceName != null  and localProvinceName != ''"> and local_province_name like concat('%', #{localProvinceName}, '%')</if>
+            <if test="localTypeName != null  and localTypeName != ''"> and local_type_name like concat('%', #{localTypeName}, '%')</if>
+            <if test="max != null  and max != ''"> and max = #{max}</if>
+            <if test="min != null "> and min = #{min}</if>
+            <if test="minSection != null "> and min_section = #{minSection}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="natureName != null  and natureName != ''"> and nature_name like concat('%', #{natureName}, '%')</if>
+            <if test="num != null  and num != ''"> and num = #{num}</if>
+            <if test="proscore != null  and proscore != ''"> and proscore = #{proscore}</if>
+            <if test="provinceId != null "> and province_id = #{provinceId}</if>
+            <if test="provinceName != null  and provinceName != ''"> and province_name like concat('%', #{provinceName}, '%')</if>
+            <if test="schoolId != null "> and school_id = #{schoolId}</if>
+            <if test="sgFxk != null "> and sg_fxk = #{sgFxk}</if>
+            <if test="sgName != null  and sgName != ''"> and sg_name like concat('%', #{sgName}, '%')</if>
+            <if test="sgSxk != null  and sgSxk != ''"> and sg_sxk = #{sgSxk}</if>
+            <if test="sgType != null "> and sg_type = #{sgType}</if>
+            <if test="specialGroup != null  and specialGroup != ''"> and special_group = #{specialGroup}</if>
+            <if test="xclevelName != null  and xclevelName != ''"> and xclevel_name like concat('%', #{xclevelName}, '%')</if>
+            <if test="year != null "> and year = #{year}</if>
+            <if test="zslxName != null  and zslxName != ''"> and zslx_name like concat('%', #{zslxName}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectSchoolScoresById" parameterType="Long" resultMap="SchoolScoresResult">
+        <include refid="selectSchoolScoresVo"/>
+        where id = #{id}
+    </select>
+<!--selectPosition-->
+    <select id="selectPosition" parameterType="com.ruoyi.gk.domain.vo.RecommendVo" resultMap="SchoolScoresResult">
+        <include refid="selectSchoolScoresVo"/>
+        where school_scores.school_id in   (select school_id from school_scores where school_scores.min_section &gt; #{position})
+        <if test="localProvinceName != null">and local_province_name like concat('%', #{localProvinceName}, '%')</if>
+        <if test="institution_level != null">and nature_name like concat('%', #{institution_level}, '%')</if>
+        <if test="region != null">and province_name like concat('%', #{region}, '%')</if>
+        <if test="institution_type != null"> and school_scores.school_id in (select school_id from schools where  schools.type_name like concat('%',#{institution_type}, '%') )</if>
+    </select>
+
+    <insert id="insertSchoolScores" parameterType="com.ruoyi.gk.domain.SchoolScores" useGeneratedKeys="true" keyProperty="id">
+        insert into school_scores
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="answerurl != null">answerurl,</if>
+            <if test="average != null">average,</if>
+            <if test="avgSection != null">avg_section,</if>
+            <if test="cityName != null">city_name,</if>
+            <if test="countyName != null">county_name,</if>
+            <if test="dualClass != null">dual_class,</if>
+            <if test="dualClassName != null">dual_class_name,</if>
+            <if test="filing != null">filing,</if>
+            <if test="firstKm != null">first_km,</if>
+            <if test="localBatchId != null">local_batch_id,</if>
+            <if test="localBatchName != null">local_batch_name,</if>
+            <if test="localProvinceName != null">local_province_name,</if>
+            <if test="localTypeName != null">local_type_name,</if>
+            <if test="max != null">max,</if>
+            <if test="min != null">min,</if>
+            <if test="minSection != null">min_section,</if>
+            <if test="name != null">`name`,</if>
+            <if test="natureName != null">nature_name,</if>
+            <if test="num != null">num,</if>
+            <if test="proscore != null">proscore,</if>
+            <if test="provinceId != null">province_id,</if>
+            <if test="provinceName != null">province_name,</if>
+            <if test="schoolId != null">school_id,</if>
+            <if test="sgFxk != null">sg_fxk,</if>
+            <if test="sgInfo != null">sg_info,</if>
+            <if test="sgName != null">sg_name,</if>
+            <if test="sgSxk != null">sg_sxk,</if>
+            <if test="sgType != null">sg_type,</if>
+            <if test="specialGroup != null">special_group,</if>
+            <if test="xclevelName != null">xclevel_name,</if>
+            <if test="year != null">`year`,</if>
+            <if test="zslxName != null">zslx_name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="answerurl != null">#{answerurl},</if>
+            <if test="average != null">#{average},</if>
+            <if test="avgSection != null">#{avgSection},</if>
+            <if test="cityName != null">#{cityName},</if>
+            <if test="countyName != null">#{countyName},</if>
+            <if test="dualClass != null">#{dualClass},</if>
+            <if test="dualClassName != null">#{dualClassName},</if>
+            <if test="filing != null">#{filing},</if>
+            <if test="firstKm != null">#{firstKm},</if>
+            <if test="localBatchId != null">#{localBatchId},</if>
+            <if test="localBatchName != null">#{localBatchName},</if>
+            <if test="localProvinceName != null">#{localProvinceName},</if>
+            <if test="localTypeName != null">#{localTypeName},</if>
+            <if test="max != null">#{max},</if>
+            <if test="min != null">#{min},</if>
+            <if test="minSection != null">#{minSection},</if>
+            <if test="name != null">#{name},</if>
+            <if test="natureName != null">#{natureName},</if>
+            <if test="num != null">#{num},</if>
+            <if test="proscore != null">#{proscore},</if>
+            <if test="provinceId != null">#{provinceId},</if>
+            <if test="provinceName != null">#{provinceName},</if>
+            <if test="schoolId != null">#{schoolId},</if>
+            <if test="sgFxk != null">#{sgFxk},</if>
+            <if test="sgInfo != null">#{sgInfo},</if>
+            <if test="sgName != null">#{sgName},</if>
+            <if test="sgSxk != null">#{sgSxk},</if>
+            <if test="sgType != null">#{sgType},</if>
+            <if test="specialGroup != null">#{specialGroup},</if>
+            <if test="xclevelName != null">#{xclevelName},</if>
+            <if test="year != null">#{year},</if>
+            <if test="zslxName != null">#{zslxName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSchoolScores" parameterType="com.ruoyi.gk.domain.SchoolScores">
+        update school_scores
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="answerurl != null">answerurl = #{answerurl},</if>
+            <if test="average != null">average = #{average},</if>
+            <if test="avgSection != null">avg_section = #{avgSection},</if>
+            <if test="cityName != null">city_name = #{cityName},</if>
+            <if test="countyName != null">county_name = #{countyName},</if>
+            <if test="dualClass != null">dual_class = #{dualClass},</if>
+            <if test="dualClassName != null">dual_class_name = #{dualClassName},</if>
+            <if test="filing != null">filing = #{filing},</if>
+            <if test="firstKm != null">first_km = #{firstKm},</if>
+            <if test="localBatchId != null">local_batch_id = #{localBatchId},</if>
+            <if test="localBatchName != null">local_batch_name = #{localBatchName},</if>
+            <if test="localProvinceName != null">local_province_name = #{localProvinceName},</if>
+            <if test="localTypeName != null">local_type_name = #{localTypeName},</if>
+            <if test="max != null">max = #{max},</if>
+            <if test="min != null">min = #{min},</if>
+            <if test="minSection != null">min_section = #{minSection},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="natureName != null">nature_name = #{natureName},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="proscore != null">proscore = #{proscore},</if>
+            <if test="provinceId != null">province_id = #{provinceId},</if>
+            <if test="provinceName != null">province_name = #{provinceName},</if>
+            <if test="schoolId != null">school_id = #{schoolId},</if>
+            <if test="sgFxk != null">sg_fxk = #{sgFxk},</if>
+            <if test="sgInfo != null">sg_info = #{sgInfo},</if>
+            <if test="sgName != null">sg_name = #{sgName},</if>
+            <if test="sgSxk != null">sg_sxk = #{sgSxk},</if>
+            <if test="sgType != null">sg_type = #{sgType},</if>
+            <if test="specialGroup != null">special_group = #{specialGroup},</if>
+            <if test="xclevelName != null">xclevel_name = #{xclevelName},</if>
+            <if test="year != null">`year` = #{year},</if>
+            <if test="zslxName != null">zslx_name = #{zslxName},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSchoolScoresById" parameterType="Long">
+        delete from school_scores where id = #{id}
+    </delete>
+
+    <delete id="deleteSchoolScoresByIds" parameterType="String">
+        delete from school_scores where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

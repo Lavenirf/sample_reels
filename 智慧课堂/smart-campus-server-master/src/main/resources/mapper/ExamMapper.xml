@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.core.mapper.ExamMapper">
+
+    <resultMap type="com.core.entity.Exam" id="ExamResult">
+        <result property="id" column="id"/>
+        <result property="teacherId" column="teacher_id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="clazzIds" column="clazz_ids"/>
+        <result property="name" column="name"/>
+        <result property="examTime" column="exam_time"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <sql id="selectExamVo">
+        select id, teacher_id, course_id, clazz_ids, name, exam_time, create_time from exam
+    </sql>
+
+    <select id="selectExamList" parameterType="com.core.entity.Exam" resultMap="ExamResult">
+        <include refid="selectExamVo"/>
+        <where>
+            <if test="name != null  and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="examTime != null ">
+                and exam_time = #{examTime}
+            </if>
+            <if test="teacherId != null ">
+                and teacher_id = #{teacherId}
+            </if>
+            <if test="clazzIds != null ">
+                and clazz_ids = #{clazzIds}
+            </if>
+            <if test="createTime != null ">
+                and create_time = #{createTime}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectExamById" parameterType="Long" resultMap="ExamResult">
+        <include refid="selectExamVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertExam" parameterType="com.core.entity.Exam" useGeneratedKeys="true" keyProperty="id">
+        insert into exam
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="teacherId != null">
+                teacher_id,
+            </if>
+            <if test="courseId != null">
+                course_id,
+            </if>
+            <if test="clazzIds != null">
+                clazz_ids,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="examTime != null">
+                exam_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="teacherId != null">
+                #{teacherId},
+            </if>
+            <if test="courseId != null">
+                #{courseId},
+            </if>
+            <if test="clazzIds != null">
+                #{clazzIds},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="examTime != null">
+                #{examTime},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateExam" parameterType="com.core.entity.Exam">
+        update exam
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teacherId != null">
+                teacher_id = #{teacherId},
+            </if>
+            <if test="courseId != null">
+                course_id = #{courseId},
+            </if>
+            <if test="clazzIds != null">
+                clazz_ids = #{clazzIds},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="examTime != null">
+                exam_time = #{examTime},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteExamById" parameterType="Long">
+        delete from exam where id = #{id}
+    </delete>
+
+    <delete id="deleteExamByIds" parameterType="String">
+        delete from exam where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

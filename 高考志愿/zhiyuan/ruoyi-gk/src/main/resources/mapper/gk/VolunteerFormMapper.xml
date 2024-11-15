@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gk.mapper.VolunteerFormMapper">
+    
+    <resultMap type="com.ruoyi.gk.domain.VolunteerForm" id="VolunteerFormResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="result"    column="result"    />
+    </resultMap>
+
+    <sql id="selectVolunteerFormVo">
+        select id, name,result,  user_id, create_time from volunteer_form
+    </sql>
+
+    <select id="selectVolunteerFormList" parameterType="com.ruoyi.gk.domain.VolunteerForm" resultMap="VolunteerFormResult">
+        <include refid="selectVolunteerFormVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and `name` like concat('%', #{name}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectVolunteerFormByUserId"  parameterType="com.ruoyi.gk.domain.VolunteerForm" resultMap="VolunteerFormResult">
+       select * from volunteer_form
+        where user_id = #{id}
+    </select>
+    <select id="selectVolunteerFormById"  parameterType="com.ruoyi.gk.domain.VolunteerForm" resultMap="VolunteerFormResult">
+       select * from volunteer_form
+        where id = #{id}
+    </select>
+
+        
+    <insert id="insertVolunteerForm" parameterType="com.ruoyi.gk.domain.VolunteerForm" useGeneratedKeys="true" keyProperty="id">
+        insert into volunteer_form
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="result != null">result,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="result != null">#{result},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVolunteerForm" parameterType="com.ruoyi.gk.domain.VolunteerForm">
+        update volunteer_form
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="result != null">result = #{result},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVolunteerFormById" parameterType="Long">
+        delete from volunteer_form where id = #{id}
+    </delete>
+
+</mapper>

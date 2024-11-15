@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.example.labsystem.mapper.LabMapper">
+    <select id="getLabs" resultType="org.example.labsystem.pojo.entity.Lab">
+        select *
+        from labs;
+    </select>
+    <insert id="insertLab" parameterType="org.example.labsystem.pojo.entity.Lab">
+        INSERT INTO labs
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="capacity != null">capacity,</if>
+            <if test="labType != null">lab_type,</if>
+            <if test="collegeType != null">college_type,</if>
+            <if test="x != null">x,</if>
+            <if test="y != null">y,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="capacity != null">#{capacity},</if>
+            <if test="labType != null">#{labType},</if>
+            <if test="collegeType != null">#{collegeType},</if>
+            <if test="x != null">#{x},</if>
+            <if test="y != null">#{y},</if>
+        </trim>
+    </insert>
+    <update id="updateLab" parameterType="org.example.labsystem.pojo.entity.Lab">
+        update labs
+            <set>
+                <if test="title!=null">
+                    title=#{title},
+                </if>
+                <if test="capacity!=null">
+                    capacity=#{capacity},
+                </if>
+                <if test="labType!=null">
+                    lab_type=#{labType},
+                </if>
+                <if test="collegeType!=null">
+                    college_type=#{collegeType},
+                </if>
+                <if test="x!=null">
+                    x=#{x},
+                </if>
+                <if test="y!=null">
+                    y=#{y}
+                </if>
+            </set>
+        where id =#{id}
+    </update>
+    <delete id="deleteLab">
+        delete from labs where id=#{id}
+    </delete>
+</mapper>

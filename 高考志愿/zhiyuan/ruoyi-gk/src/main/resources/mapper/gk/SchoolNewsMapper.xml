@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gk.mapper.SchoolNewsMapper">
+    
+    <resultMap type="com.ruoyi.gk.domain.SchoolNews" id="SchoolNewsResult">
+        <result property="id"    column="id"    />
+        <result property="newsTitle"    column="news_title"    />
+        <result property="newsContent"    column="news_content"    />
+        <result property="publishPlace"    column="publish_place"    />
+        <result property="publishDate"    column="publish_date"    />
+        <result property="newsUrl"    column="news_url"    />
+    </resultMap>
+
+    <sql id="selectSchoolNewsVo">
+        select id, news_title, news_content, publish_place, publish_date, news_url from school_news
+    </sql>
+
+    <select id="selectSchoolNewsList" parameterType="com.ruoyi.gk.domain.SchoolNews" resultMap="SchoolNewsResult">
+        <include refid="selectSchoolNewsVo"/>
+        <where>  
+            <if test="newsTitle != null  and newsTitle != ''"> and news_title like concat('%',#{newsTitle}, '%') </if>
+            <if test="newsContent != null  and newsContent != ''"> and news_content = #{newsContent}</if>
+            <if test="publishPlace != null  and publishPlace != ''"> and publish_place like concat(#{publishPlace}, '%') </if>
+            <if test="publishDate != null  and publishDate != ''"> and publish_date = #{publishPlace}</if>
+            <if test="newsUrl != null  and newsUrl != ''"> and news_url = #{newsUrl}</if>
+        </where>
+        Order By publish_date
+    </select>
+    
+    <select id="selectSchoolNewsById" parameterType="Long" resultMap="SchoolNewsResult">
+        <include refid="selectSchoolNewsVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSchoolNews" parameterType="com.ruoyi.gk.domain.SchoolNews" useGeneratedKeys="true" keyProperty="id">
+        insert into school_news
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="newsTitle != null">news_title,</if>
+            <if test="newsContent != null">news_content,</if>
+            <if test="publishPlace != null">publish_place,</if>
+            <if test="publishDate != null">publish_date,</if>
+            <if test="newsUrl != null">news_url,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="newsTitle != null">#{newsTitle},</if>
+            <if test="newsContent != null">#{newsContent},</if>
+            <if test="publishPlace != null">#{publishPlace},</if>
+            <if test="publishDate != null">#{publishDate},</if>
+            <if test="newsUrl != null">#{newsUrl},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSchoolNews" parameterType="com.ruoyi.gk.domain.SchoolNews">
+        update school_news
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="newsTitle != null">news_title = #{newsTitle},</if>
+            <if test="newsContent != null">news_content = #{newsContent},</if>
+            <if test="publishPlace != null">publish_place = #{publishPlace},</if>
+            <if test="publishDate != null">publish_date = #{publishDate},</if>
+            <if test="newsUrl != null">news_url = #{newsUrl},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSchoolNewsById" parameterType="Long">
+        delete from school_news where id = #{id}
+    </delete>
+
+    <delete id="deleteSchoolNewsByIds" parameterType="String">
+        delete from school_news where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

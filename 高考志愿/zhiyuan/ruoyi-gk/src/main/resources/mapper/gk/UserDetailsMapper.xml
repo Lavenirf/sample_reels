@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gk.mapper.UserDetailsMapper">
+    <!--    更新使用-->
+    <resultMap type="com.ruoyi.gk.domain.UserDetails" id="UpdateUserDetailsResult">
+        <result property="userId" column="user_id"/>
+        <result property="examinationArea" column="examination_area"/>
+        <result property="birthplace" column="birthplace"/>
+        <result property="schoolName" column="school_name"/>
+        <result property="identityInformation" column="Identity_information"/>
+        <result property="grade" column="grade"/>
+        <result property="subject1" column="subject1"/>
+        <result property="subject2" column="subject2"/>
+        <result property="subject3" column="subject3"/>
+        <result property="fraction" column="fraction"/>
+        <result property="ranking" column="ranking"/>
+        <result property="candidateType" column="candidate_type"/>
+        <result property="volunteerFormId" column="volunteer_form_id"/>
+        <result property="questionnaireId" column="questionnaire_id"/>
+        <result property="hollandResultId" column="holland_result_id"/>
+        <result property="remarks" column="remarks"/>
+    </resultMap>
+
+    <!--查询使用-->
+    <resultMap type="com.ruoyi.gk.domain.UserInformation" id="SelectUserDetailsResult">
+        <result property="userId" column="user_id"/>
+        <result property="examinationArea" column="examination_area"/>
+        <result property="birthplace" column="birthplace"/>
+        <result property="schoolName" column="school_name"/>
+        <result property="identityInformation" column="Identity_information"/>
+        <result property="grade" column="grade"/>
+        <result property="subject1" column="subject1"/>
+        <result property="subject2" column="subject2"/>
+        <result property="subject3" column="subject3"/>
+        <result property="fraction" column="fraction"/>
+        <result property="ranking" column="ranking"/>
+        <result property="candidateType" column="candidate_type"/>
+        <result property="volunteerFormId" column="volunteer_form_id"/>
+        <result property="questionnaireId" column="questionnaire_id"/>
+        <result property="hollandResultId" column="holland_result_id"/>
+        <result property="remarks" column="remarks"/>
+        <result property="userName" column="user_name"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="email" column="email"/>
+        <result property="phonenumber" column="phonenumber"/>
+        <result property="sex" column="sex"/>
+        <result property="avatar" column="avatar"/>
+        <result property="status" column="status"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="loginIp" column="login_ip"/>
+        <result property="loginDate" column="login_date"/>
+        <collection property="personalFavoritesList" ofType="com.ruoyi.gk.domain.PersonalFavorites" javaType="list" resultMap="PersonalFavoritesResult"/>
+    </resultMap>
+
+    <resultMap type="com.ruoyi.gk.domain.PersonalFavorites" id="PersonalFavoritesResult">
+        <result property="id"    column="id"    />
+        <result property="collectType"    column="collect_type"    />
+        <result property="schoolId"    column="school_id"    />
+        <result property="specialId"    column="special_id"    />
+        <result property="remake"    column="remake"    />
+    </resultMap>
+
+
+
+    <select id="selectUserDetailsByUserId" parameterType="Long" resultMap="SelectUserDetailsResult">
+        SELECT us.user_id,
+               us.user_name,
+               us.nick_name,
+               us.email,
+               us.password,
+               us.phonenumber,
+               us.sex,
+               us.avatar,
+               us.status,
+               us.del_flag,
+               us.login_ip,
+               us.login_date,
+               de.examination_area,
+               de.birthplace,
+               de.school_name, de.Identity_information,
+               de.grade,
+               de.subject1,
+               de.subject2,
+               de.subject3,
+               de.fraction,
+               de.ranking,
+               de.candidate_type,
+               de.volunteer_form_id,
+               de.questionnaire_id,
+               de.holland_result_id,
+               de.remarks,
+               pe.id,
+               pe.collect_type,
+               pe.school_id,
+               pe.special_id
+
+        FROM sys_user us
+                 LEFT JOIN user_details de
+                           ON us.user_id = de.user_id
+                 LEFT JOIN personal_favorites pe
+                           ON us.user_id = pe.user_id
+
+        WHERE us.user_id = #{userId};
+    </select>
+    <update id="updateUserDetails" parameterType="com.ruoyi.gk.domain.UserInformation">
+        update user_details de
+        left join sys_user us
+        on de.user_id =us.user_id
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="examinationArea != null">
+                de.examination_area = #{examinationArea},
+            </if>
+            <if test="birthplace != null">
+                de.birthplace = #{birthplace},
+            </if>
+            <if test="schoolName != null">
+                de.school_name = #{schoolName},
+            </if>
+            <if test="identityInformation != null">
+                de.Identity_information = #{identityInformation},
+            </if>
+            <if test="grade != null">
+                de.grade = #{grade},
+            </if>
+            <if test="subject1 != null">
+                de.subject1 = #{subject1},
+            </if>
+            <if test="subject2 != null">
+                de.subject2 = #{subject2},
+            </if>
+            <if test="subject3 != null">
+                de.subject3 = #{subject3},
+            </if>
+            <if test="fraction != null">
+                de.fraction = #{fraction},
+            </if>
+            <if test="ranking != null">
+                de.ranking = #{ranking},
+            </if>
+            <if test="candidateType != null">
+                de.candidate_type = #{candidateType},
+            </if>
+            <if test="volunteerFormId != null">
+                de.volunteer_form_id = #{volunteerFormId},
+            </if>
+            <if test="questionnaireId != null">
+                de.questionnaire_id = #{questionnaireId},
+            </if>
+            <if test="hollandResultId != null">
+                de.holland_result_id = #{hollandResultId},
+            </if>
+            <if test="remarks != null">
+                de.remarks = #{remarks},
+            </if>
+            <if test="userName != null and userName != ''">
+                us.user_name = #{userName},
+            </if>
+            <if test="nickName != null and nickName != ''">
+                us.nick_name = #{nickName},
+            </if>
+            <if test="email != null ">
+                us.email = #{email},
+            </if>
+            <if test="phonenumber != null ">
+                us.phonenumber = #{phonenumber},
+            </if>
+            <if test="sex != null and sex != ''">
+                us.sex = #{sex},
+            </if>
+            <if test="avatar != null and avatar != ''">
+                us.avatar = #{avatar},
+            </if>
+            <if test="password != null and password != ''">
+                us.password = #{password},
+            </if>
+            update_time = sysdate()
+        </trim>
+        where de.user_id =#{userId}
+    </update>
+    <insert id="insertUserDetails" parameterType="UserDetails">
+        insert into user_details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="examinationArea != null">examination_area,</if>
+            <if test="birthplace != null">birthplace,</if>
+            <if test="schoolName != null">school_name,</if>
+            <if test="identityInformation != null">Identity_information,</if>
+            <if test="grade != null">grade,</if>
+            <if test="subject1 != null">subject1,</if>
+            <if test="subject2 != null">subject2,</if>
+            <if test="subject3 != null">subject3,</if>
+            <if test="fraction != null">fraction,</if>
+            <if test="ranking != null">ranking,</if>
+            <if test="candidateType != null">candidate_type,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="examinationArea != null">#{examinationArea},</if>
+            <if test="birthplace != null">#{birthplace},</if>
+            <if test="schoolName != null">#{schoolName},</if>
+            <if test="identityInformation != null">#{identityInformation},</if>
+            <if test="grade != null">#{grade},</if>
+            <if test="subject1 != null">#{subject1},</if>
+            <if test="subject2 != null">#{subject2},</if>
+            <if test="subject3 != null">#{subject3},</if>
+            <if test="fraction != null">#{fraction},</if>
+            <if test="ranking != null">#{ranking},</if>
+            <if test="candidateType != null">#{candidateType},</if>
+        </trim>
+    </insert>
+</mapper>

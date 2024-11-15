@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gk.mapper.SchoolSpecialMapper">
+    <resultMap type="com.ruoyi.gk.domain.SchoolSpecial" id="SchoolSpecialResult">
+        <result property="specialId" column="special_id"/>
+        <result property="boyRate" column="boy_rate"/>
+        <result property="degree" column="degree"/>
+        <result property="fivesalaryavg" column="fivesalaryavg"/>
+        <result property="girlRate" column="girl_rate"/>
+        <result property="level1" column="level1"/>
+        <result property="level1Name" column="level1_name"/>
+        <result property="level2" column="level2"/>
+        <result property="level2Name" column="level2_name"/>
+        <result property="level3" column="level3"/>
+        <result property="level3Name" column="level3_name"/>
+        <result property="limitYear" column="limit_year"/>
+        <result property="name" column="name"/>
+        <result property="spcode" column="spcode"/>
+    </resultMap>
+
+    <sql id="selectSchoolSpecialVo">
+        select special_id,
+               boy_rate,
+               degree,
+               fivesalaryavg,
+               girl_rate,
+               level1,
+               level1_name,
+               level2,
+               level2_name,
+               level3,
+               level3_name,
+               limit_year,
+               name,
+               spcode
+        from special
+    </sql>
+
+    <select id="selectSchoolSpecialList" parameterType="com.ruoyi.gk.domain.SchoolSpecial"
+            resultMap="SchoolSpecialResult">
+        <include refid="selectSchoolSpecialVo"/>
+        <where>
+            <if test="specialId != null ">
+                and special_id = #{specialId}
+            </if>
+            <if test="boyRate != null  and boyRate != ''">
+                and boy_rate = #{boyRate}
+            </if>
+            <if test="degree != null  and degree != ''">
+                and degree = #{degree}
+            </if>
+            <if test="fivesalaryavg != null ">
+                and fivesalaryavg = #{fivesalaryavg}
+            </if>
+            <if test="girlRate != null  and girlRate != ''">
+                and girl_rate = #{girlRate}
+            </if>
+            <if test="level1 != null ">
+                and level1 = #{level1}
+            </if>
+            <if test="level1Name != null  and level1Name != ''">
+                and level1_name like concat('%', #{level1Name}, '%')
+            </if>
+            <if test="level2 != null ">
+                and level2 = #{level2}
+            </if>
+            <if test="level2Name != null  and level2Name != ''">
+                and level2_name like concat('%', #{level2Name}, '%')
+            </if>
+            <if test="level3 != null ">
+                and level3 = #{level3}
+            </if>
+            <if test="level3Name != null  and level3Name != ''">
+                and level3_name like concat('%', #{level3Name}, '%')
+            </if>
+            <if test="limitYear != null  and limitYear != ''">
+                and limit_year = #{limitYear}
+            </if>
+            <if test="name != null  and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+            <if test="spcode != null  and spcode != ''">
+                and spcode = #{spcode}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectSchoolSpecialBySpecialId" parameterType="Long" resultMap="SchoolSpecialResult">
+        <include refid="selectSchoolSpecialVo"/>
+        where special_id = #{specialId}
+    </select>
+
+    <insert id="insertSchoolSpecial" parameterType="com.ruoyi.gk.domain.SchoolSpecial">
+        insert into school_special
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="specialId != null">
+                special_id,
+            </if>
+            <if test="boyRate != null">
+                boy_rate,
+            </if>
+            <if test="degree != null">
+                degree,
+            </if>
+            <if test="fivesalaryavg != null">
+                fivesalaryavg,
+            </if>
+            <if test="girlRate != null">
+                girl_rate,
+            </if>
+            <if test="level1 != null">
+                level1,
+            </if>
+            <if test="level1Name != null">
+                level1_name,
+            </if>
+            <if test="level2 != null">
+                level2,
+            </if>
+            <if test="level2Name != null">
+                level2_name,
+            </if>
+            <if test="level3 != null">
+                level3,
+            </if>
+            <if test="level3Name != null">
+                level3_name,
+            </if>
+            <if test="limitYear != null">
+                limit_year,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="spcode != null">
+                spcode,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="specialId != null">
+                #{specialId},
+            </if>
+            <if test="boyRate != null">
+                #{boyRate},
+            </if>
+            <if test="degree != null">
+                #{degree},
+            </if>
+            <if test="fivesalaryavg != null">
+                #{fivesalaryavg},
+            </if>
+            <if test="girlRate != null">
+                #{girlRate},
+            </if>
+            <if test="level1 != null">
+                #{level1},
+            </if>
+            <if test="level1Name != null">
+                #{level1Name},
+            </if>
+            <if test="level2 != null">
+                #{level2},
+            </if>
+            <if test="level2Name != null">
+                #{level2Name},
+            </if>
+            <if test="level3 != null">
+                #{level3},
+            </if>
+            <if test="level3Name != null">
+                #{level3Name},
+            </if>
+            <if test="limitYear != null">
+                #{limitYear},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="spcode != null">
+                #{spcode},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateSchoolSpecial" parameterType="com.ruoyi.gk.domain.SchoolSpecial">
+        update school_special
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="boyRate != null">
+                boy_rate = #{boyRate},
+            </if>
+            <if test="degree != null">
+                degree = #{degree},
+            </if>
+            <if test="fivesalaryavg != null">
+                fivesalaryavg = #{fivesalaryavg},
+            </if>
+            <if test="girlRate != null">
+                girl_rate = #{girlRate},
+            </if>
+            <if test="level1 != null">
+                level1 = #{level1},
+            </if>
+            <if test="level1Name != null">
+                level1_name = #{level1Name},
+            </if>
+            <if test="level2 != null">
+                level2 = #{level2},
+            </if>
+            <if test="level2Name != null">
+                level2_name = #{level2Name},
+            </if>
+            <if test="level3 != null">
+                level3 = #{level3},
+            </if>
+            <if test="level3Name != null">
+                level3_name = #{level3Name},
+            </if>
+            <if test="limitYear != null">
+                limit_year = #{limitYear},
+            </if>
+            <if test="name != null">
+                `name`= #{name},
+            </if>
+            <if test="spcode != null">
+                spcode = #{spcode},
+            </if>
+        </trim>
+        where special_id = #{specialId}
+    </update>
+
+    <delete id="deleteSchoolSpecialBySpecialId" parameterType="Long">
+        delete
+        from special
+        where special_id = #{specialId}
+    </delete>
+
+    <delete id="deleteSchoolSpecialBySpecialIds" parameterType="String">
+        delete from special where special_id in
+        <foreach item="specialId" collection="array" open="(" separator="," close=")">
+            #{specialId}
+        </foreach>
+    </delete>
+
+    <select id="selectSpecialByName" resultMap="SchoolSpecialResult">
+        <include refid="selectSchoolSpecialVo"/>
+        <where>
+            <if test="name!=null and name !=''">name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+</mapper>

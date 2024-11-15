@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.example.labsystem.mapper.BookMapper">
+    <resultMap id="result" type="org.example.labsystem.pojo.entity.Book">
+        <result column="id" property="id"/>
+        <result column="lab_id" property="labId"/>
+        <result column="book_time" property="bookTime"/>
+        <result column="book_class" property="bookClass"/>
+        <result column="book_reason" property="bookReason"/>
+        <result column="book_user" property="bookUser"/>
+        <result column="book_state" property="bookState"/>
+        <association property="lab" javaType="org.example.labsystem.pojo.entity.Lab" select="getLabsByid" column="lab_id">
+        </association>
+        <association property="useName" javaType="java.lang.String" select="getUseName" column="book_user">
+        </association>
+
+    </resultMap>
+    <select id="getLabsByid" resultType="org.example.labsystem.pojo.entity.Lab">
+        select *
+        from labs
+        where id=#{labId}
+    </select>
+    <select id="getUseName" resultType="java.lang.String">
+        select username
+        from users
+        where id =#{useId}
+    </select>
+    <insert id="insertBook" parameterType="org.example.labsystem.pojo.entity.Book">
+        insert into books
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null">
+                id,
+            </if>
+            <if test="labId!=null">
+                lab_id,
+            </if>
+            <if test="bookTime!=null">
+                book_time,
+            </if>
+            <if test="bookClass!=null">
+                book_class,
+            </if>
+            <if test="bookReason!=null">
+                book_reason,
+            </if>
+            <if test="bookUser!=null">
+                book_user,
+            </if>
+            <if test="bookState!=null">
+                book_state,
+            </if>
+
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="labId!=null">
+                #{labId},
+            </if>
+            <if test="bookTime!=null">
+                #{bookTime},
+            </if>
+            <if test="bookClass!=null">
+                #{bookClass},
+            </if>
+            <if test="bookReason!=null">
+                #{bookReason},
+            </if>
+            <if test="bookUser!=null">
+                #{bookUser},
+            </if>
+            <if test="bookState!=null">
+                #{bookState},
+            </if>
+        </trim>
+    </insert>
+    <select id="getList" resultMap="result">
+        select *
+        from books
+        <where>
+            <if test="labId!=null and labId!=''">
+                and lab_id=#{labId}
+            </if>
+            <if test="bookTime!=null">
+                and book_time = #{bookTime}
+                and book_state !=2
+            </if>
+            <if test="bookUser!=null and bookUser!=''">
+                and book_user =#{bookUser}
+            </if>
+            <if test="bookState!=null">
+                and book_state=#{bookState}
+                and book_time>=curdate()
+            </if>
+        </where>
+        order by book_time,book_class ASC
+    </select>
+    <update id="updateBook">
+        update books
+        <trim suffixOverrides=",">
+            <set>
+                <if test="labId!=null">
+                    lab_id=#{labId},
+                </if>
+                <if test="bookTime!=null">
+                    book_time=#{bookTime},
+                </if>
+                <if test="bookClass!=null">
+                    book_class=#{bookClass},
+                </if>
+                <if test="bookReason!=null">
+                    book_reason=#{bookReason},
+                </if>
+                <if test="bookUser!=null">
+                    book_user=#{bookUser},
+                </if>
+                <if test="bookState!=null">
+                    book_state=#{bookState}
+                </if>
+            </set>
+        </trim>
+        where id =#{id}
+    </update>
+
+    <delete id="deleteBook">
+        delete from books where id=#{id}
+    </delete>
+</mapper>

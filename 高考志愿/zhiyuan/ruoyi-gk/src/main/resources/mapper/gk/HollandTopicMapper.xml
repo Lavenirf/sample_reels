@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gk.mapper.HollandTopicMapper">
+
+    <resultMap type="com.ruoyi.gk.domain.HollandTopic" id="HollandTopicResult">
+        <result property="topicId"    column="topic_id"    />
+        <result property="topicContent"    column="topic_content"    />
+        <result property="topicType"    column="topic_type"    />
+        <result property="topicAnswer"    column="topic_answer"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectHollandTopicVo">
+        select topic_id, topic_content, topic_type, topic_answer, create_by, create_time, update_by, update_time, remark from holland_topic
+    </sql>
+
+    <select id="selectHollandTopicList" parameterType="com.ruoyi.gk.domain.HollandTopic" resultMap="HollandTopicResult">
+        <include refid="selectHollandTopicVo"/>
+        <where>
+            <if test="topicContent != null  and topicContent != ''"> and topic_content like concat('%', #{topicContent}, '%')</if>
+            <if test="topicType != null  and topicType != ''"> and topic_type = #{topicType}</if>
+            <if test="topicAnswer != null "> and topic_answer = #{topicAnswer}</if>
+        </where>
+    </select>
+
+    <select id="selectHollandTopicByTopicId" parameterType="Long" resultMap="HollandTopicResult">
+        <include refid="selectHollandTopicVo"/>
+        where topic_id = #{topicId}
+    </select>
+
+    <insert id="insertHollandTopic" parameterType="com.ruoyi.gk.domain.HollandTopic" useGeneratedKeys="true" keyProperty="topicId">
+        insert into holland_topic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="topicContent != null and topicContent != ''">topic_content,</if>
+            <if test="topicType != null and topicType != ''">topic_type,</if>
+            <if test="topicAnswer != null">topic_answer,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="topicContent != null and topicContent != ''">#{topicContent},</if>
+            <if test="topicType != null and topicType != ''">#{topicType},</if>
+            <if test="topicAnswer != null">#{topicAnswer},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="updateHollandTopic" parameterType="com.ruoyi.gk.domain.HollandTopic">
+        update holland_topic
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="topicContent != null and topicContent != ''">topic_content = #{topicContent},</if>
+            <if test="topicType != null and topicType != ''">topic_type = #{topicType},</if>
+            <if test="topicAnswer != null">topic_answer = #{topicAnswer},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where topic_id = #{topicId}
+    </update>
+
+    <delete id="deleteHollandTopicByTopicId" parameterType="Long">
+        delete from holland_topic where topic_id = #{topicId}
+    </delete>
+
+    <delete id="deleteHollandTopicByTopicIds" parameterType="String">
+        delete from holland_topic where topic_id in
+        <foreach item="topicId" collection="array" open="(" separator="," close=")">
+            #{topicId}
+        </foreach>
+    </delete>
+</mapper>

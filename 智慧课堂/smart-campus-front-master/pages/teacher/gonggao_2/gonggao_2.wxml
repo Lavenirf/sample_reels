@@ -1,0 +1,60 @@
+<view class="zhkttz-flex-col">
+  <view class="zhkttz-flex-col zhkttz-justify-start section">
+    <view class="zhkttz-flex-row zhkttz-justify-center zhkttz-items-center zhkttz-relative section_2">
+
+      <text class="text">发布通知</text>
+    </view>
+  </view>
+  <view class="zhkttz-flex-col zhkttz-self-start section_3 space-y-12">
+    <view class="zhkttz-flex-row zhkttz-justify-between zhkttz-items-center">
+      <text class="text_2">我发出的</text>
+    </view>
+    <view class="zhkttz-flex-col zhkttz-items-start group space-y-6">
+      <text class="font_2">今天下午四点开会，讲关于实训的安排</text>
+      <text class="font_2">，到教室别忘记签到。</text>
+    </view>
+  </view>
+  <view class="zhkttz-flex-col section_4">
+    <view class="zhkttz-flex-col zhkttz-items-start group_2">
+      <view class="zhkttz-flex-row zhkttz-items-center group_3">
+        <text class="font_3">选择发布班级：</text>
+      </view>
+    </view>
+    <text class="font_3">种类：</text>
+    <i-panel title="group-种类">
+      <i-radio-group current="{{current}}" bindchange="handleFruitChange">
+        <i-radio wx:for="{{fruit}}" position="{{position}}" wx:key="index" value="{{item.name}}">
+        </i-radio>
+      </i-radio-group>
+    </i-panel>
+
+
+
+    <view class="zhkttz-flex-col group_5">
+      <view class="zhkttz-flex-row zhkttz-justify-between zhkttz-items-center group_6">
+        <text class="font_3">发布时间：</text>
+        <view class="zhkttz-flex-row zhkttz-items-end space-x-6">
+          <text class="font_1">{{time}}</text>
+          <image class="zhkttz-shrink-0 image_3" src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/649d44f95a7e3f0310ecb166/649d59e0726ab50011f452e2/16880340978780744949.png" />
+        </view>
+      </view>
+      <view class="zhkttz-self-end section_8"></view>
+    </view>
+
+
+    <text class="zhkttz-self-start font_3">通知内容：</text>
+    <view class="zhkttz-flex-col zhkttz-items-start section_9 space-y-6">
+      <i-panel title="无标题输入框">
+        <i-input value="{{ value5 }}" placeholder="请输入要发布通知的内容" />
+      </i-panel>
+
+    </view>
+  </view>
+</view>
+<i-button bind:click="handleClick" type="success" shape="circle" size="small">完成并提交</i-button>
+<view class="zhkttz-flex-col zhkttz-justify-start zhkttz-relative group_8">
+
+
+
+</view>
+<i-load-more tip="到底啦别翻啦" loading="{{ false }}" />

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+     "i-notice-bar": "/components/dist/notice-bar/index",
+     "i-card": "/components/dist/card/index",
+     "i-load-more": "/components/dist/load-more/index"
+    }
+}

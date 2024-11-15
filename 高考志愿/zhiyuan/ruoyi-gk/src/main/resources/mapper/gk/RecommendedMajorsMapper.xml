@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gk.mapper.RecommendedMajorsMapper">
+
+    <resultMap type="com.ruoyi.gk.domain.RecommendedMajors" id="RecommendedMajorsResult">
+        <result property="id"    column="id"    />
+        <result property="schoolName"    column="school_name"    />
+        <result property="specialId"    column="special_id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="specialName"    column="special_name"    />
+        <result property="schoolId"    column="school_id"    />
+        <result property="glRatio"    column="gl_ratio"    />
+    </resultMap>
+
+    <sql id="selectRecommendedMajorsVo">
+        select id, school_name,user_id, special_id, special_name, school_id, gl_ratio from recommended_majors
+    </sql>
+
+    <select id="selectRecommendedMajorsbao" parameterType="com.ruoyi.gk.domain.RecommendedMajors" resultMap="RecommendedMajorsResult">
+        <include refid="selectRecommendedMajorsVo"/>
+        <where>
+            0.3&gt;gl_ratio and gl_ratio!=0
+        </where>
+    </select>
+    <select id="selectRecommendedMajorswen" parameterType="com.ruoyi.gk.domain.RecommendedMajors" resultMap="RecommendedMajorsResult">
+        <include refid="selectRecommendedMajorsVo"/>
+        <where>
+            0.3&lt;gl_ratio and gl_ratio &lt;0.7
+        </where>
+    </select>
+    <select id="selectRecommendedMajorschong" parameterType="com.ruoyi.gk.domain.RecommendedMajors" resultMap="RecommendedMajorsResult">
+        <include refid="selectRecommendedMajorsVo"/>
+        <where>
+             gl_ratio &gt;0.7
+        </where>
+    </select>
+    <select id="selectRecommendedMajorsList" parameterType="com.ruoyi.gk.domain.RecommendedMajors" resultMap="RecommendedMajorsResult">
+        <include refid="selectRecommendedMajorsVo"/>
+        <where>
+            <if test="schoolName != null  and schoolName != ''"> and school_name like concat('%', #{schoolName}, '%')</if>
+            <if test="specialId != null "> and special_id = #{specialId}</if>
+            <if test="specialName != null  and specialName != ''"> and special_name like concat('%', #{specialName}, '%')</if>
+            <if test="schoolId != null "> and school_id = #{schoolId}</if>
+            <if test="glRatio != null "> and gl_ratio = #{glRatio}</if>
+        </where>
+    </select>
+
+    <select id="selectRecommendedMajorsById" parameterType="Long" resultMap="RecommendedMajorsResult">
+        <include refid="selectRecommendedMajorsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertRecommendedMajors" parameterType="com.ruoyi.gk.domain.RecommendedMajors" useGeneratedKeys="true" keyProperty="id">
+        insert into recommended_majors
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="schoolName != null ">school_name,</if>
+            <if test="specialId != null">special_id,</if>
+            <if test="specialName != null">special_name,</if>
+            <if test="schoolId != null">school_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="glRatio != null">gl_ratio,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="schoolName != null and schoolName != ''">#{schoolName},</if>
+            <if test="specialId != null">#{specialId},</if>
+            <if test="specialName != null">#{specialName},</if>
+            <if test="schoolId != null">#{schoolId},</if>
+            <if test="userId != null">#{user_id},</if>
+            <if test="glRatio != null">#{glRatio},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRecommendedMajors" parameterType="com.ruoyi.gk.domain.RecommendedMajors">
+        update recommended_majors
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="schoolName != null and schoolName != ''">school_name = #{schoolName},</if>
+            <if test="specialId != null">special_id = #{specialId},</if>
+            <if test="specialName != null">special_name = #{specialName},</if>
+            <if test="schoolId != null">school_id = #{schoolId},</if>
+            <if test="glRatio != null">gl_ratio = #{glRatio},</if>
+            <if test="userId != null">user_id=#{userId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRecommendedMajorsById" parameterType="Long">
+        delete from recommended_majors where id = #{id}
+    </delete>
+
+    <delete id="deleteRecommendedMajorsByIds" parameterType="String">
+        delete from recommended_majors where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteRecommendedMajorsAll" parameterType="String">
+        delete from recommended_majors where 1=1
+    </delete>
+</mapper>

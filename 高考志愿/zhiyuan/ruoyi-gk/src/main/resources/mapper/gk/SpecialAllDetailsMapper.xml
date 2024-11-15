@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gk.mapper.SpecialAllDetailsMapper">
+    <resultMap type="com.ruoyi.gk.domain.SchoolSpecial" id="SchoolSpecialResult">
+        <result property="specialId" column="special_id"/>
+        <result property="boyRate" column="boy_rate"/>
+        <result property="degree" column="degree"/>
+        <result property="fivesalaryavg" column="fivesalaryavg"/>
+        <result property="girlRate" column="girl_rate"/>
+        <result property="level1" column="level1"/>
+        <result property="level1Name" column="level1_name"/>
+        <result property="level2" column="level2"/>
+        <result property="level2Name" column="level2_name"/>
+        <result property="level3" column="level3"/>
+        <result property="level3Name" column="level3_name"/>
+        <result property="limitYear" column="limit_year"/>
+        <result property="name" column="name"/>
+        <result property="spcode" column="spcode"/>
+    </resultMap>
+    <resultMap id="finalDetails" type="com.ruoyi.gk.domain.SpecialDetails">
+        <id property="id" column="id"/>
+        <result property="specialId" column="special_id"/>
+        <result property="specialName" column="special_name"/>
+        <result property="level1Name" column="level1_name"/>
+        <result property="type" column="type"/>
+        <result property="typeDetail" column="type_detail"/>
+        <result property="code" column="code"/>
+        <result property="limitYear" column="limit_year"/>
+        <result property="degree" column="degree"/>
+        <result property="avgSalary" column="avg_salary"/>
+        <result property="selAdv" column="sel_adv"/>
+        <result property="direction" column="direction"/>
+        <result property="celebrity" column="celebrity"/>
+        <result property="course" column="course"/>
+        <result property="job" column="job"/>
+        <result property="level3" column="level3"/>
+        <result property="level2" column="level2"/>
+        <result property="level1" column="level1"/>
+        <result property="isWhat" column="is_what"/>
+        <result property="learnWhat" column="learn_what"/>
+        <result property="doWhat" column="do_what"/>
+        <result property="work21" column="work_21"/>
+        <result property="work22" column="work_22"/>
+        <result property="work23" column="work_23"/>
+        <result property="sexRate" column="sex_rate"/>
+        <result property="artScienceRate" column="art_science_rate"/>
+        <result property="content" column="content"/>
+        <result property="graduateFiveSalary" column="graduate_five_salary"/>
+        <result property="post" column="post"/>
+        <result property="mentarea" column="mentarea"/>
+        <result property="industry" column="industry"/>
+        <result column="out_fresh_graduates" property="outFreshGraduates"/>
+        <result column="this_fresh_graduates" property="thisFreshGraduates"/>
+        <collection column="employment_distribution_item" javaType="ArrayList" property="employmentDistribution"
+                    resultMap="SpecialEmployDistributionResult"/>
+        <collection column="employment_areas_item" javaType="ArrayList" property="employmentAreas"
+                    resultMap="SpecialEmployLocationResult"/>
+        <collection column="employment_positions_item" javaType="ArrayList" property="employmentPositions"
+                    resultMap="SpecialEmployPositionsResult"/>
+    </resultMap>
+    <resultMap type="com.ruoyi.gk.domain.SpecialEmployPositions" id="SpecialEmployPositionsResult">
+        <result property="employmentPositionsItem" column="employment_positions_item" typeHandler="com.ruoyi.framework.handler.JSONObjectTypeHandler"/>
+    </resultMap>
+    <resultMap type="com.ruoyi.gk.domain.SpecialEmployLocation" id="SpecialEmployLocationResult">
+        <result property="employmentAreasItem" column="employment_areas_item" typeHandler="com.ruoyi.framework.handler.JSONObjectTypeHandler"/>
+    </resultMap>
+    <resultMap type="com.ruoyi.gk.domain.SpecialJobDetails" id="SpecialEmployDistributionResult">
+        <result property="employmentDistributionItem"  column="employment_distribution_item" typeHandler="com.ruoyi.framework.handler.JSONObjectTypeHandler"/>
+    </resultMap>
+    <select id="selectSpecialAllDetailsById" parameterType="Long" resultMap="finalDetails">
+        SELECT de.*,
+               lo.employment_areas_item,
+               po.employment_positions_item,
+               sa.this_fresh_graduates,
+               sa.out_fresh_graduates,
+               job.employment_distribution_item
+        FROM special_all_details de
+                 LEFT JOIN special_employ_location lo ON de.special_id = lo.special_id
+                 left join special_employ_positions po on de.special_id = po.special_id
+                 left join special_foldline_salary sa on de.special_id = sa.special_id
+                 left join special_job_details job on de.special_id = job.special_id
+        WHERE de.special_id = #{specialId};
+    </select>
+
+    <select id="selectSpecialByName" resultType="com.ruoyi.gk.domain.SchoolSpecial" resultMap="SchoolSpecialResult">
+        select * from special
+        <where>
+            <if test="name!=null and name !=''">name like concat('%',#{name},'%')</if>
+        </where>
+    </select>
+</mapper>

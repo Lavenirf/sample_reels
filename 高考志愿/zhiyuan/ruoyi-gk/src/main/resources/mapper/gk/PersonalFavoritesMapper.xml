@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gk.mapper.PersonalFavoritesMapper">
+    <resultMap type="com.ruoyi.gk.domain.PersonalFavorites" id="PersonalFavoritesResult">
+        <result property="id" column="id"/>
+        <result property="collectType" column="collect_type"/>
+        <result property="schoolId" column="school_id"/>
+        <result property="specialId" column="special_id"/>
+        <result property="remake" column="remake"/>
+        <result property="userId" column="user_id"/>
+    </resultMap>
+
+    <sql id="selectPersonalFavoritesVo">
+        select id, collect_type, school_id, special_id, remake
+        from personal_favorites
+    </sql>
+
+    <select id="selectPersonalFavoritesById" parameterType="Long" resultMap="PersonalFavoritesResult">
+        <include refid="selectPersonalFavoritesVo"/>
+        where user_id = #{userId}
+    </select>
+
+    <insert id="insertPersonalFavorites" parameterType="com.ruoyi.gk.domain.PersonalFavorites">
+        insert into personal_favorites
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="collectType != null">
+                collect_type,
+            </if>
+            <if test="schoolId != null">
+                school_id,
+            </if>
+            <if test="specialId != null">
+                special_id,
+            </if>
+            <if test="remake != null">
+                remake,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="collectType != null">
+                #{collectType},
+            </if>
+            <if test="schoolId != null">
+                #{schoolId},
+            </if>
+            <if test="specialId != null">
+                #{specialId},
+            </if>
+            <if test="remake != null">
+                #{remake},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+        </trim>
+    </insert>
+
+
+    <delete id="deletePersonalFavoritesById" parameterType="Long">
+        delete
+        from personal_favorites
+        where id = #{id}
+    </delete>
+
+    <resultMap type="com.ruoyi.gk.domain.Schools" id="SchoolsResult">
+        <result property="id"    column="id"    />
+        <result property="belong"    column="belong"    />
+        <result property="central"    column="central"    />
+        <result property="cityId"    column="city_id"    />
+        <result property="cityName"    column="city_name"    />
+        <result property="codeEnroll"    column="code_enroll"    />
+        <result property="countyId"    column="county_id"    />
+        <result property="countyName"    column="county_name"    />
+        <result property="dualClass"    column="dual_class"    />
+        <result property="dualClassName"    column="dual_class_name"    />
+        <result property="f211"    column="f211"    />
+        <result property="f985"    column="f985"    />
+        <result property="isRecruitment"    column="is_recruitment"    />
+        <result property="level"    column="level"    />
+        <result property="levelName"    column="level_name"    />
+        <result property="name"    column="name"    />
+        <result property="nature"    column="nature"    />
+        <result property="natureName"    column="nature_name"    />
+        <result property="provinceId"    column="province_id"    />
+        <result property="provinceName"    column="province_name"    />
+        <result property="recommendMasterLevel"    column="recommend_master_level"    />
+        <result property="schoolId"    column="school_id"    />
+        <result property="schoolType"    column="school_type"    />
+        <result property="tagName"    column="tag_name"    />
+        <result property="townName"    column="town_name"    />
+        <result property="type"    column="type"    />
+        <result property="typeName"    column="type_name"    />
+        <result property="viewMonth"    column="view_month"    />
+        <result property="viewTotal"    column="view_total"    />
+        <result property="viewTotalNumber"    column="view_total_number"    />
+        <result property="viewWeek"    column="view_week"    />
+    </resultMap>
+
+    <select id="selectSchoolById" resultType="com.ruoyi.gk.domain.Schools" resultMap="SchoolsResult">
+        select * from schools where school_id = #{schoolId}
+    </select>
+    <resultMap id="finalDetails" type="com.ruoyi.gk.domain.SpecialDetails">
+        <id property="id" column="id"/>
+        <result property="specialId" column="special_id"/>
+        <result property="specialName" column="special_name"/>
+        <result property="level1Name" column="level1_name"/>
+        <result property="type" column="type"/>
+        <result property="typeDetail" column="type_detail"/>
+        <result property="code" column="code"/>
+        <result property="limitYear" column="limit_year"/>
+        <result property="degree" column="degree"/>
+        <result property="avgSalary" column="avg_salary"/>
+        <result property="selAdv" column="sel_adv"/>
+        <result property="direction" column="direction"/>
+        <result property="celebrity" column="celebrity"/>
+        <result property="course" column="course"/>
+        <result property="job" column="job"/>
+        <result property="level3" column="level3"/>
+        <result property="level2" column="level2"/>
+        <result property="level1" column="level1"/>
+        <result property="skill" column="skill"/>
+        <result property="isWhat" column="is_what"/>
+        <result property="learnWhat" column="learn_what"/>
+        <result property="doWhat" column="do_what"/>
+        <result property="work21" column="work_21"/>
+        <result property="work22" column="work_22"/>
+        <result property="work23" column="work_23"/>
+        <result property="sexRate" column="sex_rate"/>
+        <result property="artScienceRate" column="art_science_rate"/>
+        <result property="content" column="content"/>
+        <result property="graduateFiveSalary" column="graduate_five_salary"/>
+        <result property="post" column="post"/>
+        <result property="mentarea" column="mentarea"/>
+        <result property="industry" column="industry"/>
+        <result column="out_fresh_graduates" property="outFreshGraduates"/>
+        <result column="this_fresh_graduates" property="thisFreshGraduates"/>
+    </resultMap>
+    <select id="selectSpecialById" resultType="com.ruoyi.gk.domain.SpecialDetails" resultMap="finalDetails">
+        select
+               special_name,
+               level1_name,
+               type,
+               type_detail,
+               code,
+               limit_year,
+               degree,
+               avg_salary,
+               sex_rate,
+               art_science_rate
+        from special_all_details
+        where special_id = #{specialId}
+    </select>
+</mapper>

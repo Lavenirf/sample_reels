@@ -1,0 +1,32 @@
+<!--pages/login/login.wxml-->
+<view class="content">
+  <view class="account">
+    <view class="title">帐号</view>
+    <view class="num">
+      <input bindinput="accountInput" placeholder="用户名/手机号" placeholder-style="color:#999;" />
+    </view>
+  </view>
+  <view class="hr"></view>
+  <view class="account">
+    <view class="title">密码</view>
+    <view class="num">
+      <input bindinput="pwdBlur" placeholder="请输入密码" password="{{true}}" placeholder-style="color:#999;" />
+    </view>
+    <view class="see">
+      <image src="../../img/see.jpg" style="width:42px; height:30px;" />
+    </view>
+  </view>
+  <view class="hr"></view>
+  <button class="btn" disabled="{{disabled}}" type="{{btnstate}}" bindtap="handleLogin">登录</button>
+  <view class="operate">
+    <view>
+      <navigator url="../company/company">手机快速注册</navigator>
+    </view>
+    <view>找回密码</view>
+  </view>
+  <view class="login">
+    <view>
+      <image src="../../img/wxlogin.png" />
+    </view>
+  </view>
+</view>

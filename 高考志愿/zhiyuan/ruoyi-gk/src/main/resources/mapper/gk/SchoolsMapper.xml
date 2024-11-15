@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gk.mapper.SchoolsMapper">
+    <resultMap type="com.ruoyi.gk.domain.Schools" id="SchoolsResult">
+        <result property="id" column="id"/>
+        <result property="belong" column="belong"/>
+        <result property="central" column="central"/>
+        <result property="cityId" column="city_id"/>
+        <result property="cityName" column="city_name"/>
+        <result property="codeEnroll" column="code_enroll"/>
+        <result property="countyId" column="county_id"/>
+        <result property="countyName" column="county_name"/>
+        <result property="dualClass" column="dual_class"/>
+        <result property="dualClassName" column="dual_class_name"/>
+        <result property="f211" column="f211"/>
+        <result property="f985" column="f985"/>
+        <result property="isRecruitment" column="is_recruitment"/>
+        <result property="level" column="level"/>
+        <result property="levelName" column="level_name"/>
+        <result property="name" column="name"/>
+        <result property="nature" column="nature"/>
+        <result property="natureName" column="nature_name"/>
+        <result property="provinceId" column="province_id"/>
+        <result property="provinceName" column="province_name"/>
+        <result property="recommendMasterLevel" column="recommend_master_level"/>
+        <result property="schoolId" column="school_id"/>
+        <result property="schoolType" column="school_type"/>
+        <result property="tagName" column="tag_name"/>
+        <result property="townName" column="town_name"/>
+        <result property="type" column="type"/>
+        <result property="typeName" column="type_name"/>
+        <result property="viewMonth" column="view_month"/>
+        <result property="viewTotal" column="view_total"/>
+        <result property="viewTotalNumber" column="view_total_number"/>
+        <result property="viewWeek" column="view_week"/>
+    </resultMap>
+    <resultMap id="SchoolFractionVo" type="com.ruoyi.gk.domain.vo.SchoolFractionVo">
+        <result property="id" column="id"/>
+        <result property="schoolId" column="school_id"/>
+        <result property="cityName" column="city_name"/>
+        <result property="codeEnroll" column="code_enroll"/>
+        <result property="countyName" column="county_name"/>
+        <result property="dualClassName" column="dual_class_name"/>
+        <result property="batchName" column="local_batch_name"/>
+        <result property="zsName" column="zslx_name"/>
+        <result property="name" column="name"/>
+        <result property="typeName" column="type_name"/>
+        <result property="min" column="min"/>
+        <result property="minSection" column="min_section"/>
+        <result property="f211" column="f211"/>
+        <result property="f985" column="f985"/>
+        <result property="levelName" column="level_name"/>
+    </resultMap>
+    <resultMap id="PopularSchoolVo" type="com.ruoyi.gk.domain.vo.PopularSchoolVo">
+        <result property="id" column="id"/>
+        <result property="schoolId" column="school_id"/>
+        <result property="name" column="name"/>
+        <result property="typeName" column="type_name"/>
+        <result property="natureName" column="nature_name"/>
+        <result property="codeEnroll" column="code_enroll"/>
+        <result property="viewTotalNumber" column="view_total_number"/>
+        <result property="provinceName" column="province_name"/>
+    </resultMap>
+    <sql id="selectSchoolsVo">
+        select *
+        from schools
+    </sql>
+
+    <select id="selectSchoolsList" parameterType="com.ruoyi.gk.domain.Schools" resultMap="SchoolsResult">
+        <include refid="selectSchoolsVo"/>
+        <where>
+            <if test="belong != null  and belong != ''">
+                and belong = #{belong}
+            </if>
+            <if test="central != null  and central != ''">
+                and central = #{central}
+            </if>
+            <if test="cityId != null ">
+                and city_id = #{cityId}
+            </if>
+            <if test="cityName != null  and cityName != ''">
+                and city_name like concat('%', #{cityName}, '%')
+            </if>
+            <if test="codeEnroll != null  and codeEnroll != ''">
+                and code_enroll = #{codeEnroll}
+            </if>
+            <if test="countyId != null ">
+                and county_id = #{countyId}
+            </if>
+            <if test="countyName != null  and countyName != ''">
+                and county_name like concat('%', #{countyName}, '%')
+            </if>
+            <if test="dualClass != null  and dualClass != ''">
+                and dual_class = #{dualClass}
+            </if>
+            <if test="dualClassName != null  and dualClassName != ''">
+                and dual_class_name like concat('%', #{dualClassName}, '%')
+            </if>
+            <if test="f211 != null ">
+                and f211 = #{f211}
+            </if>
+            <if test="f985 != null ">
+                and f985 = #{f985}
+            </if>
+            <if test="isRecruitment != null ">
+                and is_recruitment = #{isRecruitment}
+            </if>
+            <if test="level != null  and level != ''">
+                and `level` = #{level}
+            </if>
+            <if test="levelName != null  and levelName != ''">
+                and level_name like concat('%', #{levelName}, '%')
+            </if>
+            <if test="name != null  and name != ''">
+                and `name` like concat('%', #{name}, '%')
+            </if>
+            <if test="nature != null  and nature != ''">
+                and nature = #{nature}
+            </if>
+            <if test="natureName != null  and natureName != ''">
+                and nature_name like concat('%', #{natureName}, '%')
+            </if>
+            <if test="provinceId != null ">
+                and province_id = #{provinceId}
+            </if>
+            <if test="provinceName != null  and provinceName != ''">
+                and province_name like concat('%', #{provinceName}, '%')
+            </if>
+            <if test="recommendMasterLevel != null ">
+                and recommend_master_level = #{recommendMasterLevel}
+            </if>
+            <if test="schoolId != null ">
+                and school_id = #{schoolId}
+            </if>
+            <if test="schoolType != null  and schoolType != ''">
+                and school_type = #{schoolType}
+            </if>
+            <if test="tagName != null  and tagName != ''">
+                and tag_name like concat('%', #{tagName}, '%')
+            </if>
+            <if test="townName != null  and townName != ''">
+                and town_name like concat('%', #{townName}, '%')
+            </if>
+            <if test="type != null  and type != ''">
+                and type = #{type}
+            </if>
+            <if test="typeName != null  and typeName != ''">
+                and type_name like concat('%', #{typeName}, '%')
+            </if>
+            <if test="viewMonth != null ">
+                and view_month = #{viewMonth}
+            </if>
+            <if test="viewTotal != null  and viewTotal != ''">
+                and view_total = #{viewTotal}
+            </if>
+            <if test="viewTotalNumber != null ">
+                and view_total_number = #{viewTotalNumber}
+            </if>
+            <if test="viewWeek != null ">
+                and view_week = #{viewWeek}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectSchoolsListByLocal" resultMap="SchoolFractionVo">
+        SELECT ol.id,
+        ol.city_name,
+        ol.code_enroll,
+        ol.county_name,
+        ol.dual_class_name,
+        ol.`name`,
+        ol.school_id,
+        ol.type_name,
+        ol.f211,
+        ol.f985,
+        ol.level_name,
+        sco.min,
+        sco.min_section,
+        sco.local_batch_name,
+        sco.zslx_name
+        FROM schools ol
+        LEFT JOIN school_scores sco ON ol.school_id = sco.school_id
+        <trim prefixOverrides="and">
+            <where>
+                <if test="year!=null and year!=''">
+                    sco.`year` = #{year}
+                </if>
+                <if test="localName!=null and localName!=''">
+                    and sco.local_province_name = #{localName}
+                </if>
+                <if test="name!=null and name!=''">
+                    and ol.name like concat('%',#{name}, '%')
+                </if>
+                <if test="typeName!=null and typeName!=''">
+                    and ol.type_name like concat(#{typeName}, '%')
+                </if>
+                <if test="levelName!=null and levelName!=''">
+                    and ol.level_name=#{levelName}
+                </if>
+                <if test="provinceName!=null and provinceName!=''">
+                    and ol.province_name=#{provinceName}
+                </if>
+            </where>
+        </trim>
+        ORDER BY sco.min desc
+    </select>
+
+    <select id="selectSchoolsById" parameterType="Long" resultMap="SchoolsResult">
+        <include refid="selectSchoolsVo"/>
+        where school_id = #{schoolId}
+    </select>
+
+    <insert id="insertSchools" parameterType="com.ruoyi.gk.domain.Schools" useGeneratedKeys="true" keyProperty="id">
+        insert into schools
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="belong != null and belong != ''">
+                belong,
+            </if>
+            <if test="central != null">
+                central,
+            </if>
+            <if test="cityId != null">
+                city_id,
+            </if>
+            <if test="cityName != null">
+                city_name,
+            </if>
+            <if test="codeEnroll != null">
+                code_enroll,
+            </if>
+            <if test="countyId != null">
+                county_id,
+            </if>
+            <if test="countyName != null">
+                county_name,
+            </if>
+            <if test="dualClass != null">
+                dual_class,
+            </if>
+            <if test="dualClassName != null">
+                dual_class_name,
+            </if>
+            <if test="f211 != null">
+                f211,
+            </if>
+            <if test="f985 != null">
+                f985,
+            </if>
+            <if test="isRecruitment != null">
+                is_recruitment,
+            </if>
+            <if test="level != null">
+                `level`,
+            </if>
+            <if test="levelName != null">
+                level_name,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="nature != null">
+                nature,
+            </if>
+            <if test="natureName != null">
+                nature_name,
+            </if>
+            <if test="provinceId != null">
+                province_id,
+            </if>
+            <if test="provinceName != null">
+                province_name,
+            </if>
+            <if test="recommendMasterLevel != null">
+                recommend_master_level,
+            </if>
+            <if test="schoolId != null">
+                school_id,
+            </if>
+            <if test="schoolType != null">
+                school_type,
+            </if>
+            <if test="tagName != null and tagName != ''">
+                tag_name,
+            </if>
+            <if test="townName != null">
+                town_name,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="typeName != null">
+                type_name,
+            </if>
+            <if test="viewMonth != null">
+                view_month,
+            </if>
+            <if test="viewTotal != null">
+                view_total,
+            </if>
+            <if test="viewTotalNumber != null">
+                view_total_number,
+            </if>
+            <if test="viewWeek != null">
+                view_week,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="belong != null and belong != ''">
+                #{belong},
+            </if>
+            <if test="central != null">
+                #{central},
+            </if>
+            <if test="cityId != null">
+                #{cityId},
+            </if>
+            <if test="cityName != null">
+                #{cityName},
+            </if>
+            <if test="codeEnroll != null">
+                #{codeEnroll},
+            </if>
+            <if test="countyId != null">
+                #{countyId},
+            </if>
+            <if test="countyName != null">
+                #{countyName},
+            </if>
+            <if test="dualClass != null">
+                #{dualClass},
+            </if>
+            <if test="dualClassName != null">
+                #{dualClassName},
+            </if>
+            <if test="f211 != null">
+                #{f211},
+            </if>
+            <if test="f985 != null">
+                #{f985},
+            </if>
+            <if test="hightitle != null">
+                #{hightitle},
+            </if>
+            <if test="isRecruitment != null">
+                #{isRecruitment},
+            </if>
+            <if test="level != null">
+                #{level},
+            </if>
+            <if test="levelName != null">
+                #{levelName},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="nature != null">
+                #{nature},
+            </if>
+            <if test="natureName != null">
+                #{natureName},
+            </if>
+            <if test="provinceId != null">
+                #{provinceId},
+            </if>
+            <if test="provinceName != null">
+                #{provinceName},
+            </if>
+            <if test="recommendMasterLevel != null">
+                #{recommendMasterLevel},
+            </if>
+            <if test="schoolId != null">
+                #{schoolId},
+            </if>
+            <if test="schoolType != null">
+                #{schoolType},
+            </if>
+            <if test="tagName != null and tagName != ''">
+                #{tagName},
+            </if>
+            <if test="townName != null">
+                #{townName},
+            </if>
+            <if test="type != null">
+                #{type},
+            </if>
+            <if test="typeName != null">
+                #{typeName},
+            </if>
+            <if test="viewMonth != null">
+                #{viewMonth},
+            </if>
+            <if test="viewTotal != null">
+                #{viewTotal},
+            </if>
+            <if test="viewTotalNumber != null">
+                #{viewTotalNumber},
+            </if>
+            <if test="viewWeek != null">
+                #{viewWeek},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateSchools" parameterType="com.ruoyi.gk.domain.Schools">
+        update schools
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="belong != null and belong != ''">
+                belong = #{belong},
+            </if>
+            <if test="central != null">
+                central = #{central},
+            </if>
+            <if test="cityId != null">
+                city_id = #{cityId},
+            </if>
+            <if test="cityName != null">
+                city_name = #{cityName},
+            </if>
+            <if test="codeEnroll != null">
+                code_enroll = #{codeEnroll},
+            </if>
+            <if test="countyId != null">
+                county_id = #{countyId},
+            </if>
+            <if test="countyName != null">
+                county_name = #{countyName},
+            </if>
+            <if test="dualClass != null">
+                dual_class = #{dualClass},
+            </if>
+            <if test="dualClassName != null">
+                dual_class_name = #{dualClassName},
+            </if>
+            <if test="f211 != null">
+                f211 = #{f211},
+            </if>
+            <if test="f985 != null">
+                f985 = #{f985},
+            </if>
+            <if test="isRecruitment != null">
+                is_recruitment = #{isRecruitment},
+            </if>
+            <if test="level != null">
+                `level` = #{level},
+            </if>
+            <if test="levelName != null">
+                level_name = #{levelName},
+            </if>
+            <if test="name != null">
+                `name` = #{name},
+            </if>
+            <if test="nature != null">
+                nature = #{nature},
+            </if>
+            <if test="natureName != null">
+                nature_name = #{natureName},
+            </if>
+            <if test="provinceId != null">
+                province_id = #{provinceId},
+            </if>
+            <if test="provinceName != null">
+                province_name = #{provinceName},
+            </if>
+            <if test="recommendMasterLevel != null">
+                recommend_master_level = #{recommendMasterLevel},
+            </if>
+            <if test="schoolId != null">
+                school_id = #{schoolId},
+            </if>
+            <if test="schoolType != null">
+                school_type = #{schoolType},
+            </if>
+            <if test="tagName != null and tagName != ''">
+                tag_name = #{tagName},
+            </if>
+            <if test="townName != null">
+                town_name = #{townName},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="typeName != null">
+                type_name = #{typeName},
+            </if>
+            <if test="viewMonth != null">
+                view_month = #{viewMonth},
+            </if>
+            <if test="viewTotal != null">
+                view_total = #{viewTotal},
+            </if>
+            <if test="viewTotalNumber != null">
+                view_total_number = #{viewTotalNumber},
+            </if>
+            <if test="viewWeek != null">
+                view_week = #{viewWeek},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSchoolsById" parameterType="Long">
+        delete
+        from schools
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteSchoolsByIds" parameterType="String">
+        delete from schools where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getPopularSchool" resultMap="PopularSchoolVo">
+        SELECT
+            id,
+            school_id,
+            `name`,
+            view_total_number,
+            nature_name,
+            type_name,
+            province_name
+        FROM
+                ( SELECT * FROM schools ORDER BY view_total DESC LIMIT 100 ) AS top_100
+        <where>
+            <if test="local!=null and local !=''">province_name=#{local}</if>
+        </where>
+        ORDER BY
+            RAND()
+        LIMIT 10;
+    </select>
+
+    <select id="selectSchoolListByName" resultMap="PopularSchoolVo">
+        select
+        id,
+        school_id,
+        `name`,
+        view_total_number,
+        nature_name,
+        type_name,
+        province_name
+        from schools
+        <where>
+            <if test="name!=null and name !=''">name like concat('%',#{name},'%')</if>
+        </where>
+    </select>
+    <select id="selectSchoolByIds" resultMap="PopularSchoolVo">
+        select
+        id,
+        school_id,
+        `name`,
+        view_total_number,
+        nature_name,
+        type_name,
+        province_name,
+        `code_enroll`
+        from
+        schools
+        where school_id in
+        <foreach collection="list" open="(" close=")" item="id" separator="," >
+            #{id}
+        </foreach>
+    </select>
+</mapper>

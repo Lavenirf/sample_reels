@@ -1,0 +1,119 @@
+.page {
+  background-color: #f2f2f2;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+}
+.group_2 {
+  padding-top: 13px;
+  height: 547px;
+  overflow-y: auto;
+}
+.list {
+  margin-right: 17.5px;
+  padding-left: 17px;
+  padding-top: 12px;
+}
+.space-y-50 > view:not(:first-child),
+.space-y-50 > text:not(:first-child),
+.space-y-50 > image:not(:first-child) {
+  margin-top: 25px;
+}
+.list-item {
+  height: 161px;
+}
+.text-wrapper {
+  margin-left: -17px;
+  margin-top: -12px;
+  padding: 12px 0 10px;
+  background-color: #00c15d;
+  width: 90.5px;
+}
+.font_1 {
+  font-size: 11px;
+  font-family: SourceHanSansCN;
+  line-height: 10.5px;
+  color: #ffffff;
+}
+.text_3 {
+  line-height: 11px;
+}
+.section {
+  padding: 18px 19px 14px 21px;
+  overflow: hidden;
+  border-radius: 6px;
+  background-color: #ffffff;
+}
+.group_3 {
+  padding: 4px 0;
+}
+.space-x-30 > view:not(:first-child),
+.space-x-30 > text:not(:first-child),
+.space-x-30 > image:not(:first-child) {
+  margin-left: 15px;
+}
+.section_2 {
+  padding: 12px 0;
+  background-color: #f96f3e;
+  border-radius: 50%;
+  width: 39px;
+  height: 39px;
+}
+.group_4 {
+  line-height: 14.5px;
+}
+.font_4 {
+  font-size: 16px;
+  font-family: SourceHanSansCN;
+  line-height: 14.5px;
+  color: #ffffff;
+}
+.space-y-26 > view:not(:first-child),
+.space-y-26 > text:not(:first-child),
+.space-y-26 > image:not(:first-child) {
+  margin-top: 13px;
+}
+.font_2 {
+  font-size: 14px;
+  font-family: SourceHanSansCN;
+  line-height: 13px;
+  color: #666666;
+}
+.font_3 {
+  font-size: 11px;
+  font-family: SourceHanSansCN;
+  line-height: 8.5px;
+  color: #999999;
+}
+.font_5 {
+  font-size: 13px;
+  font-family: SourceHanSansCN;
+  line-height: 15.5px;
+  color: #333333;
+}
+.text-wrapper_2 {
+  margin-right: 3px;
+  padding: 7px 0;
+  background-color: #f2f2f2;
+  width: 243.5px;
+}
+.font_6 {
+  font-size: 11px;
+  font-family: SourceHanSansCN;
+  line-height: 10.5px;
+  color: #666666;
+}
+.text_4 {
+  margin-left: 7px;
+}
+.group_5 {
+  margin-top: 15px;
+  line-height: 10.5px;
+  height: 10.5px;
+}
+.space-y-10 > view:not(:first-child),
+.space-y-10 > text:not(:first-child),
+.space-y-10 > image:not(:first-child) {
+  margin-top: 5px;
+}

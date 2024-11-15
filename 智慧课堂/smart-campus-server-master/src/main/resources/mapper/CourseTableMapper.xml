@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.core.mapper.CourseTableMapper">
+
+    <resultMap type="com.core.entity.CourseTable" id="CourseTableResult">
+        <result property="id" column="id"/>
+        <result property="courseId" column="course_id"/>
+        <result property="clazzRoomId" column="clazz_room_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="courseDate" column="course_time"/>
+        <result property="startSection" column="start_section"/>
+        <result property="endSection" column="end_section"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <sql id="selectCourseTableVo">
+        select id, course_id, clazz_room_id, user_id, course_time, start_section, end_section, create_time from course_table
+    </sql>
+
+    <select id="selectCourseTableList" parameterType="com.core.entity.CourseTable" resultMap="CourseTableResult">
+        <include refid="selectCourseTableVo"/>
+        <where>
+            <if test="courseId != null ">
+                and course_id = #{courseId}
+            </if>
+            <if test="clazzRoomId != null ">
+                and clazz_room_id = #{clazzRoomId}
+            </if>
+            <if test="userId != null ">
+                and user_id = #{userId}
+            </if>
+            <if test="courseDate != null ">
+                and course_time = #{courseDate}
+            </if>
+            <if test="startSection != null ">
+                and start_section = #{startSection}
+            </if>
+            <if test="endSection != null ">
+                and end_section = #{endSection}
+            </if>
+            <if test="createTime != null ">
+                and create_time = #{createTime}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectCourseTableById" parameterType="Long" resultMap="CourseTableResult">
+        <include refid="selectCourseTableVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertCourseTable" parameterType="com.core.entity.CourseTable" useGeneratedKeys="true" keyProperty="id">
+        insert into course_table
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="courseId != null">
+                course_id,
+            </if>
+            <if test="clazzRoomId != null">
+                clazz_room_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="courseDate != null">
+                course_time,
+            </if>
+            <if test="startSection != null">
+                start_section,
+            </if>
+            <if test="endSection != null">
+                end_section,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="courseId != null">
+                #{courseId},
+            </if>
+            <if test="clazzRoomId != null">
+                #{clazzRoomId},
+            </if>
+            <if test="userId != null">
+                #{userId},
+            </if>
+            <if test="courseDate != null">
+                #{courseDate},
+            </if>
+            <if test="startSection != null">
+                #{startSection},
+            </if>
+            <if test="endSection != null">
+                #{endSection},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateCourseTable" parameterType="com.core.entity.CourseTable">
+        update course_table
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="courseId != null">
+                course_id = #{courseId},
+            </if>
+            <if test="clazzRoomId != null">
+                clazz_room_id = #{clazzRoomId},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="courseDate != null">
+                course_time = #{courseDate},
+            </if>
+            <if test="startSection != null">
+                start_section = #{startSection},
+            </if>
+            <if test="endSection != null">
+                end_section = #{endSection},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCourseTableById" parameterType="Long">
+        delete from course_table where id = #{id}
+    </delete>
+
+    <delete id="deleteCourseTableByIds" parameterType="String">
+        delete from course_table where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

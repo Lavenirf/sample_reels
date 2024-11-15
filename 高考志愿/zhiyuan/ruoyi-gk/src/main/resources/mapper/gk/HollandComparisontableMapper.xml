@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gk.mapper.HollandComparisontableMapper">
+
+    <resultMap type="com.ruoyi.gk.domain.HollandComparisontable" id="HollandComparisontableResult">
+        <result property="comparisontableId"    column="comparisontable_id"    />
+        <result property="comparisontableMorphology"    column="comparisontable_morphology"    />
+        <result property="typicalProfession"    column="typical_profession"    />
+        <result property="personality1"    column="personality1"    />
+        <result property="personality2"    column="personality2"    />
+        <result property="personality3"    column="personality3"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectHollandComparisontableVo">
+        select comparisontable_id, comparisontable_morphology, typical_profession,personality1,personality2,personality3, create_by, create_time, update_by, update_time, remark from holland_comparisontable
+    </sql>
+
+    <select id="selectHollandComparisontableList" parameterType="com.ruoyi.gk.domain.HollandComparisontable" resultMap="HollandComparisontableResult">
+        <include refid="selectHollandComparisontableVo"/>
+        <where>
+            <if test="comparisontableMorphology != null  and comparisontableMorphology != ''"> and comparisontable_morphology like concat('%', #{comparisontableMorphology}, '%')</if>
+            <if test="typicalProfession != null  and typicalProfession != ''"> and typical_profession like concat('%', #{typicalProfession}, '%')</if>
+        </where>
+    </select>
+
+    <select id="selectHollandComparisontableByComparisontableId" parameterType="Long" resultMap="HollandComparisontableResult">
+        <include refid="selectHollandComparisontableVo"/>
+        where comparisontable_id = #{comparisontableId}
+    </select>
+
+    <insert id="insertHollandComparisontable" parameterType="com.ruoyi.gk.domain.HollandComparisontable" useGeneratedKeys="true" keyProperty="comparisontableId">
+        insert into holland_comparisontable
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="comparisontableMorphology != null and comparisontableMorphology != ''">comparisontable_morphology,</if>
+            <if test="typicalProfession != null and typicalProfession != ''">typical_profession,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="comparisontableMorphology != null and comparisontableMorphology != ''">#{comparisontableMorphology},</if>
+            <if test="typicalProfession != null and typicalProfession != ''">#{typicalProfession},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHollandComparisontable" parameterType="com.ruoyi.gk.domain.HollandComparisontable">
+        update holland_comparisontable
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="comparisontableMorphology != null and comparisontableMorphology != ''">comparisontable_morphology = #{comparisontableMorphology},</if>
+            <if test="typicalProfession != null and typicalProfession != ''">typical_profession = #{typicalProfession},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where comparisontable_id = #{comparisontableId}
+    </update>
+
+    <delete id="deleteHollandComparisontableByComparisontableId" parameterType="Long">
+        delete from holland_comparisontable where comparisontable_id = #{comparisontableId}
+    </delete>
+
+    <delete id="deleteHollandComparisontableByComparisontableIds" parameterType="String">
+        delete from holland_comparisontable where comparisontable_id in
+        <foreach item="comparisontableId" collection="array" open="(" separator="," close=")">
+            #{comparisontableId}
+        </foreach>
+    </delete>
+</mapper>

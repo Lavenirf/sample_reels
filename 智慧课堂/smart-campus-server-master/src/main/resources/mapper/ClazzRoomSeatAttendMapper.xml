@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.core.mapper.ClazzRoomSeatAttendMapper">
+
+    <resultMap type="com.core.entity.ClazzRoomSeatAttend" id="ClazzRoomSeatAttendResult">
+        <result property="id" column="id"/>
+        <result property="clazzRoomId" column="clazz_room_id"/>
+        <result property="clazzRoomSeatId" column="clazz_room_seat_id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="publishAttendId" column="publish_attend_id"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <sql id="selectClazzRoomSeatAttendVo">
+        select id, clazz_room_id, clazz_room_seat_id, student_id, publish_attend_id, create_time from clazz_room_seat_attend
+    </sql>
+
+    <select id="selectClazzRoomSeatAttendList" parameterType="com.core.entity.ClazzRoomSeatAttend" resultMap="ClazzRoomSeatAttendResult">
+        <include refid="selectClazzRoomSeatAttendVo"/>
+        <where>
+            <if test="clazzRoomId != null ">
+                and clazz_room_id = #{clazzRoomId}
+            </if>
+            <if test="clazzRoomSeatId != null ">
+                and clazz_room_seat_id = #{clazzRoomSeatId}
+            </if>
+            <if test="studentId != null ">
+                and student_id = #{studentId}
+            </if>
+            <if test="publishAttendId != null ">
+                and publish_attend_id = #{publishAttendId}
+            </if>
+            <if test="createTime != null ">
+                and create_time = #{createTime}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectClazzRoomSeatAttendById" parameterType="Long" resultMap="ClazzRoomSeatAttendResult">
+        <include refid="selectClazzRoomSeatAttendVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertClazzRoomSeatAttend" parameterType="com.core.entity.ClazzRoomSeatAttend">
+        insert into clazz_room_seat_attend
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="clazzRoomId != null">
+                clazz_room_id,
+            </if>
+            <if test="clazzRoomSeatId != null">
+                clazz_room_seat_id,
+            </if>
+            <if test="studentId != null">
+                student_id,
+            </if>
+            <if test="publishAttendId != null">
+                publish_attend_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="clazzRoomId != null">
+                #{clazzRoomId},
+            </if>
+            <if test="clazzRoomSeatId != null">
+                #{clazzRoomSeatId},
+            </if>
+            <if test="studentId != null">
+                #{studentId},
+            </if>
+            <if test="publishAttendId != null">
+                #{publishAttendId},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateClazzRoomSeatAttend" parameterType="com.core.entity.ClazzRoomSeatAttend">
+        update clazz_room_seat_attend
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="clazzRoomId != null">
+                clazz_room_id = #{clazzRoomId},
+            </if>
+            <if test="clazzRoomSeatId != null">
+                clazz_room_seat_id = #{clazzRoomSeatId},
+            </if>
+            <if test="studentId != null">
+                student_id = #{studentId},
+            </if>
+            <if test="publishAttendId != null">
+                publish_attend_id = #{publishAttendId},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteClazzRoomSeatAttendById" parameterType="Long">
+        delete from clazz_room_seat_attend where id = #{id}
+    </delete>
+
+    <delete id="deleteClazzRoomSeatAttendByIds" parameterType="String">
+        delete from clazz_room_seat_attend where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

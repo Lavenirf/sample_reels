@@ -1,0 +1,44 @@
+<view class="zhktzyfb-flex-col page">
+  <view class="zhktzyfb-flex-col zhktzyfb-flex-auto group_2">
+    <view class="zhktzyfb-flex-col">
+      <view class="zhktzyfb-flex-row zhktzyfb-items-center group_3 space-x-16">
+        <text class="font_1">题目名称：</text>
+        <input class="font_3"></input>
+      </view>
+      <view class="zhktzyfb-self-end section"></view>
+    </view>
+    <view class="zhktzyfb-flex-col group_4">
+      <view class="zhktzyfb-flex-row zhktzyfb-items-center group_3 space-x-16">
+        <text class="font_1">发布班级：</text>
+        <text class="font_3">
+        <input value="1班"/>一班
+        <input value="2班"/>二班
+      </text>
+      </view>
+      <view class="zhktzyfb-self-end section"></view>
+    </view>
+    <view class="zhktzyfb-flex-col group_5">
+      <view class="zhktzyfb-flex-row zhktzyfb-items-center group_3 space-x-46">
+        <text class="font_1">学科：</text>
+        <input class="font_3"></input>
+      </view>
+      <view class="zhktzyfb-self-end section"></view>
+    </view>
+    <view class="zhktzyfb-flex-row search space-x-10">
+    <text class="font_3">请输入题目内容</text>
+      <view class="zhktzyfb-flex-auto section_3">
+        <input class="font_3"></input>
+      </view>
+      
+      <view class="zhktzyfb-flex-col zhktzyfb-justify-start zhktzyfb-items-center zhktzyfb-shrink-0 text-wrapper">
+        
+        <text class="text_4">添加图片</text>
+      </view>
+    </view>
+    <view class="zhktzyfb-flex-col zhktzyfb-justify-start zhktzyfb-items-center zhktzyfb-self-center button">
+      <text class="text_5">完成题目编辑</text>
+    </view>
+  </view>
+</view>
+
+

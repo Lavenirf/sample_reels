@@ -1,0 +1,249 @@
+.page {
+  padding-bottom: 41px;
+  background-color: #ffffff;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+}
+.space-y-380 > view:not(:first-child),
+.space-y-380 > text:not(:first-child),
+.space-y-380 > image:not(:first-child) {
+  margin-top: 190px;
+}
+.section {
+  background-image: url('https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/649d44f95a7e3f0310ecb166/649d59e0726ab50011f452e2/16880340964538243170.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.section_2 {
+  padding: 79px 21px 55px;
+  background-image: url('https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/649d44f95a7e3f0310ecb166/649d59e0726ab50011f452e2/16880340968473304411.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.image {
+  width: 8px;
+  height: 14.5px;
+}
+.pos {
+  position: absolute;
+  left: 21px;
+  bottom: 56.5px;
+}
+.text {
+  color: #ffffff;
+  font-size: 18px;
+  font-family: SourceHanSansCN;
+  line-height: 17px;
+}
+.section_3 {
+  margin-top: 8.5px;
+  padding: 21px 21.5px 30px 69px;
+  overflow: hidden;
+  border-radius: 0 6px 6px 0;
+  background-color: #ffffff;
+  width: 340px;
+}
+.space-y-12 > view:not(:first-child),
+.space-y-12 > text:not(:first-child),
+.space-y-12 > image:not(:first-child) {
+  margin-top: 6px;
+}
+.text_2 {
+  color: #666666;
+  font-size: 14px;
+  font-family: SourceHanSansCN;
+  line-height: 13px;
+}
+.font_1 {
+  font-size: 11px;
+  font-family: SourceHanSansCN;
+  line-height: 8.5px;
+  color: #999999;
+}
+.group {
+  margin-right: 15px;
+}
+.font_2 {
+  font-size: 13px;
+  font-family: SourceHanSansCN;
+  line-height: 15.5px;
+  color: #333333;
+}
+.section_4 {
+  margin: 10px 15.5px 0 19.5px;
+  padding: 20px 0 22px 19px;
+  filter: drop-shadow(0px 1px 12.5px #d2d2d2c2);
+  background-image: url('https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/649d44f95a7e3f0310ecb166/649d59e0726ab50011f452e2/16883871404663419420.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.section_5 {
+  margin-right: 20px;
+  padding: 29px 0 31px;
+  background-image: url('https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/649d44f95a7e3f0310ecb166/649d59e0726ab50011f452e2/16880340978510958089.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.space-y-20 > view:not(:first-child),
+.space-y-20 > text:not(:first-child),
+.space-y-20 > image:not(:first-child) {
+  margin-top: 10px;
+}
+.section_6 {
+  background-color: #c1c1c1;
+  width: 35.5px;
+  height: 36px;
+}
+.text_3 {
+  color: #666666;
+  font-size: 12px;
+  font-family: SourceHanSansCN;
+  line-height: 11.5px;
+}
+.group_2 {
+  margin-top: 24px;
+}
+.group_3 {
+  width: 258px;
+}
+.font_3 {
+  font-size: 15px;
+  font-family: SourceHanSansCN;
+  line-height: 14px;
+  color: #333333;
+}
+.equal-division {
+  padding-bottom: 3px;
+}
+.equal-division-item {
+  padding: 5px 0;
+  width: 76.5px;
+}
+.space-x-16 > view:not(:first-child),
+.space-x-16 > text:not(:first-child),
+.space-x-16 > image:not(:first-child) {
+  margin-left: 8px;
+}
+.section_7 {
+  background-color: #ffffff;
+  border-radius: 50%;
+  width: 9px;
+  height: 9px;
+  border: solid 0.5px #dedede;
+}
+.font_4 {
+  font-size: 11px;
+  font-family: SourceHanSansCN;
+  line-height: 10.5px;
+  color: #333333;
+}
+.image_2 {
+  border-radius: 50%;
+  width: 9px;
+  height: 9px;
+}
+.divider {
+  margin-left: 102px;
+  background-color: #edeef0;
+  width: 319.5px;
+  height: 0.5px;
+}
+.group_4 {
+  margin-top: 30px;
+  width: 237.5px;
+}
+.space-x-22 > view:not(:first-child),
+.space-x-22 > text:not(:first-child),
+.space-x-22 > image:not(:first-child) {
+  margin-left: 11px;
+}
+.equal-division-item_2 {
+  flex: 1 1 95px;
+  padding: 5px 8px;
+  width: 95px;
+}
+.space-x-12-reverse > view:not(:last-child),
+.space-x-12-reverse > text:not(:last-child),
+.space-x-12-reverse > image:not(:last-child) {
+  margin-right: 6px;
+}
+.text_4 {
+  line-height: 10px;
+}
+.group_5 {
+  margin-right: 20px;
+  margin-top: 29px;
+}
+.group_6 {
+  padding-bottom: 7px;
+}
+.space-x-6 > view:not(:first-child),
+.space-x-6 > text:not(:first-child),
+.space-x-6 > image:not(:first-child) {
+  margin-left: 3px;
+}
+.image_3 {
+  width: 13px;
+  height: 13px;
+}
+.section_8 {
+  margin-right: 1.5px;
+  background-color: #edeef0;
+  width: 230px;
+  height: 0.5px;
+}
+.text_5 {
+  margin-top: 32px;
+}
+.group_7 {
+  margin-right: 20px;
+  margin-top: 54px;
+}
+.space-y-32 > view:not(:first-child),
+.space-y-32 > text:not(:first-child),
+.space-y-32 > image:not(:first-child) {
+  margin-top: 16px;
+}
+.section_9 {
+  padding: 16px 17px 56px;
+  background-image: url('https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/649d44f95a7e3f0310ecb166/649d59e0726ab50011f452e2/16880340978510958089.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.space-y-6 > view:not(:first-child),
+.space-y-6 > text:not(:first-child),
+.space-y-6 > image:not(:first-child) {
+  margin-top: 3px;
+}
+.font_5 {
+  font-size: 11px;
+  font-family: SourceHanSansCN;
+  line-height: 13px;
+  color: #999999;
+}
+.group_8 {
+  padding: 4px 0 7px;
+}
+.section_10 {
+  background-color: #ffffff;
+  height: 34.5px;
+}
+.button {
+  padding: 16px 0 14px;
+  background-color: #03bf5e;
+  border-radius: 25px;
+}
+.pos_2 {
+  position: absolute;
+  left: 18px;
+  right: 17px;
+  top: 0;
+}
+.text_6 {
+  color: #ffffff;
+  font-size: 17px;
+  font-family: SourceHanSansCN;
+  line-height: 16px;
+}

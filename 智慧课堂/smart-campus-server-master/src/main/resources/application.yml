@@ -1,0 +1,55 @@
+#Tomcat配置
+server:
+  port: 7001
+  servlet:
+    session:
+      timeout: 1800 # Token有效期
+    encoding:
+      force: true  # 强制将HTTP请求和响应编码为所配置的字符集。
+
+#Spring应用相关配置
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 200MB
+  datasource:
+    url: jdbc:mysql://8.130.135.127:52436/smart-campus?serverTimezone=GMT%2B8&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 161519
+  mvc:
+    converters:
+      preferred-json-mapper: fastjson   # HTTP消息转换时优先使用JSON映射器。
+  jackson:
+    time-zone: GMT+8  # 指定时间区域类型
+
+mybatis-plus:
+  type-aliases-package: com.entity
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    call-setters-on-nulls: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+
+#Redis配置
+redisProperties:
+  REDIS_MAX_TOTAL: 50                     # 连接池最大连接数（使用负值表示没有限制）
+  REDIS_MAX_WAIT: -1                      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+  REDIS_MAX_IDLE: 50                      # 连接池中的最大空闲连接
+  REDIS_HOST: 8.130.135.127               # Redis服务器地址
+  REDIS_PORT: 56379                       # Redis服务器连接端口
+  REDIS_TIMEOUT: 200000                   # 连接超时时间（毫秒）
+  REDIS_USE_PASSWORD: Y                   # 是否需要密码
+  REDIS_PASSWORD: 161519                  # Redis服务器连接密码（默认为空）
+
+file:
+  upload:
+    path: ./file/upload
+  static:
+    path: /static
+  view:
+    path: http://localhost:${server.port}${file.static.path}/

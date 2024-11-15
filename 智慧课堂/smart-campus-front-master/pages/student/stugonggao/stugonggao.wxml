@@ -1,0 +1,42 @@
+<view class="zhktxx-flex-col page">
+  <view class="zhktxx-flex-col zhktxx-justify-start zhktxx-flex-auto group_2">
+    <view class="zhktxx-flex-col list space-y-50">
+      <view
+        class="zhktxx-flex-col list-item space-y-10"
+        wx:key="*this"
+        wx:for-item="item"
+        wx:for-index="i"
+        wx:for="{{list_LEFCXyct}}"
+      >
+        <view
+          class="zhktxx-flex-col zhktxx-justify-start zhktxx-items-center zhktxx-self-start zhktxx-relative text-wrapper"
+        >
+          <text class="font_1 text_3">2022/04/22</text>
+        </view>
+        <view class="zhktxx-flex-col section">
+          <view class="zhktxx-flex-row group_3 space-x-30">
+            <view
+              class="zhktxx-flex-col zhktxx-justify-start zhktxx-items-center zhktxx-shrink-0 zhktxx-self-start section_2"
+            >
+              <view class="group_4">
+                <text class="font_4">通</text>
+                <text class="font_1">知</text>
+              </view>
+            </view>
+            <view class="zhktxx-flex-col zhktxx-flex-auto zhktxx-self-center space-y-26">
+              <view class="zhktxx-flex-row zhktxx-justify-between zhktxx-items-center">
+                <text class="font_2">考试通知</text>
+                <text class="font_3">2023-06-21</text>
+              </view>
+              <text class="font_5">下周进行本学期xx学科期末测试，同学们做好准备认真复习！</text>
+            </view>
+          </view>
+          <view class="zhktxx-flex-col zhktxx-justify-start zhktxx-items-start zhktxx-self-end text-wrapper_2">
+            <text class="font_6 text_4">刘同学、赵同学、王同学...等37人已读</text>
+          </view>
+          <view class="zhktxx-shrink-0 zhktxx-self-end group_5"></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

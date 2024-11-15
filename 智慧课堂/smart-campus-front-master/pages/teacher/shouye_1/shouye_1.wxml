@@ -1,0 +1,48 @@
+<view class="zhktsy-flex-col zhktsy-justify-start page">
+  <view class="zhktsy-flex-col group space-y-24">
+    <view class="zhktsy-flex-col group_2 space-y-36">
+      <view class="zhktsy-flex-row space-x-10">
+        <text class="text">早上好{{classList[0].teacherName}}老师 祝您工作顺利</text>
+        <image class="image" src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/649d44f95a7e3f0310ecb166/649d59e0726ab50011f452e2/16880341018268953512.png" />
+      </view>
+      <view class="zhktsy-flex-col group_3 space-y-15">
+        <view class="zhktsy-flex-col group_4">
+          <view class="zhktsy-shrink-0 zhktsy-self-start section"></view>
+          <image class="zhktsy-shrink-0 zhktsy-self-center image_2" src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/649d44f95a7e3f0310ecb166/649d59e0726ab50011f452e2/16883842105425413110.png" />
+        </view>
+        <view class="zhktsy-flex-col zhktsy-justify-start">
+          <view class="zhktsy-flex-row equal-division">
+            <view class="zhktsy-flex-col zhktsy-items-center equal-division-item space-y-10 " bindtap="tclass">
+              <image class="image_3" src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/649d44f95a7e3f0310ecb166/649d59e0726ab50011f452e2/0d122b4df9e403bfb0058d2ab0e95ee9.png" />
+              <text class="font_1">课堂</text>
+            </view>
+            <view class="zhktsy-flex-col zhktsy-items-center equal-division-item space-y-10" bindtap="tword">
+              <image class="image_3" src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/649d44f95a7e3f0310ecb166/649d59e0726ab50011f452e2/4e84fde32c8c69d119cb6696baa16f94.png" />
+              <text class="font_1">发布作业</text>
+
+
+            </view>
+            <view class="zhktsy-flex-col zhktsy-items-center equal-division-item space-y-10" bindtap="twork">
+              <image class="image_3" src="https://codefun-proj-user-res-1256085488.cos.ap-guangzhou.myqcloud.com/649d44f95a7e3f0310ecb166/649d59e0726ab50011f452e2/1add383c18a35a9a838b932367ffe823.png" />
+              <text class="font_1">查看作业</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="zhktsy-flex-col space-y-38">
+      <view class="zhktsy-flex-col space-y-38">
+        <i-notice-bar icon="systemprompt" loop>
+          您好{{classList[0].teacherName}}老师，今天是{{time}}。今日有2门课需要教学。
+        </i-notice-bar>
+        <block wx:for="{{classList}}" wx:key="index">
+          <i-card title="{{item.className}}" extra="正在上课" thumb="/img/d3 (1).png">
+            <view slot="footer">{{item.teacherName}}</view>
+          </i-card>
+        </block>
+        <i-load-more tip="到底啦别翻啦" loading="{{ false }}" />
+        <text class="font_1">{{item.className}} {{item.teacherName}}</text>
+      </view>
+    </view>
+  </view>
+</view>

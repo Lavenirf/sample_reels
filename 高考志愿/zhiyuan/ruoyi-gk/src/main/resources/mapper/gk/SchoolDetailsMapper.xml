@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gk.mapper.SchoolDetailsMapper">
+    
+    <resultMap type="com.ruoyi.gk.domain.SchoolDetails" id="SchoolDetailsResult">
+        <result property="id"    column="id"    />
+        <result property="schoolId"    column="school_id"    />
+        <result property="name"    column="name"    />
+        <result property="numSubject"    column="num_subject"    />
+        <result property="numMaster"    column="num_master"    />
+        <result property="numDoctor"    column="num_doctor"    />
+        <result property="numAcademician"    column="num_academician"    />
+        <result property="numLibrary"    column="num_library"    />
+        <result property="numLab"    column="num_lab"    />
+        <result property="provinceId"    column="province_id"    />
+        <result property="cityId"    column="city_id"    />
+        <result property="isAds"    column="is_ads"    />
+        <result property="isRecruitment"    column="is_recruitment"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="area"    column="area"    />
+        <result property="oldName"    column="old_name"    />
+        <result property="isFenxiao"    column="is_fenxiao"    />
+        <result property="status"    column="status"    />
+        <result property="shortName"    column="short"    />
+        <result property="usRank"    column="us_rank"    />
+        <result property="isLogo"    column="is_logo"    />
+        <result property="numMaster2"    column="num_master2"    />
+        <result property="numDoctor2"    column="num_doctor2"    />
+        <result property="aiStatus"    column="ai_status"    />
+        <result property="isAds2"    column="is_ads2"    />
+        <result property="coopMoney"    column="coop_money"    />
+        <result property="gbhNum"    column="gbh_num"    />
+        <result property="email"    column="email"    />
+        <result property="schoolEmail"    column="school_email"    />
+        <result property="address"    column="address"    />
+        <result property="postcode"    column="postcode"    />
+        <result property="site"    column="site"    />
+        <result property="schoolSite"    column="school_site"    />
+        <result property="phone"    column="phone"    />
+        <result property="content"    column="content"    />
+    </resultMap>
+    <resultMap id="SchoolDetailsVo" type="com.ruoyi.gk.domain.vo.SchoolDetailsVo">
+        <result property="id"    column="id"    />
+        <result property="schoolId"    column="school_id"    />
+        <result property="name"    column="name"    />
+        <result property="belong"    column="belong"    />
+        <result property="numSubject"    column="num_subject"    />
+        <result property="numMaster"    column="num_master"    />
+        <result property="numDoctor"    column="num_doctor"    />
+        <result property="numAcademician"    column="num_academician"    />
+        <result property="numLibrary"    column="num_library"    />
+        <result property="numLab"    column="num_lab"    />
+        <result property="provinceId"    column="province_id"    />
+        <result property="cityId"    column="city_id"    />
+        <result property="isAds"    column="is_ads"    />
+        <result property="isRecruitment"    column="is_recruitment"    />
+        <result property="createDate"    column="create_date"    />
+        <result property="area"    column="area"    />
+        <result property="oldName"    column="old_name"    />
+        <result property="isFenxiao"    column="is_fenxiao"    />
+        <result property="status"    column="status"    />
+        <result property="shortName"    column="short"    />
+        <result property="usRank"    column="us_rank"    />
+        <result property="numMaster2"    column="num_master2"    />
+        <result property="numDoctor2"    column="num_doctor2"    />
+        <result property="coopMoney"    column="coop_money"    />
+        <result property="gbhNum"    column="gbh_num"    />
+        <result property="email"    column="email"    />
+        <result property="schoolEmail"    column="school_email"    />
+        <result property="address"    column="address"    />
+        <result property="postcode"    column="postcode"    />
+        <result property="site"    column="site"    />
+        <result property="schoolSite"    column="school_site"    />
+        <result property="phone"    column="phone"    />
+        <result property="natureName" column="nature_name"/>
+        <result property="dualClassName" column="dual_class_name"/>
+        <result property="f211" column="f211"/>
+        <result property="f985" column="f985"/>
+        <result property="levelName" column="level_name"/>
+        <result property="provinceName" column="province_name"/>
+        <result property="cityName" column="city_name"/>
+        <result property="typeName" column="type_name"/>
+        <collection property="rankList" ofType="com.ruoyi.gk.domain.vo.SchoolRankVo" javaType="java.util.List" resultMap="SchoolRankType"/>
+    </resultMap>
+    <resultMap id="SchoolRankType" type="com.ruoyi.gk.domain.vo.SchoolRankVo">
+        <result property="id" column="id"/>
+        <result property="schoolId" column="school_id"/>
+        <result property="rankType" column="rank_type"/>
+        <result property="rank" column="rank"/>
+    </resultMap>
+
+    <sql id="selectSchoolDetailsVo">
+        select id, school_id, name, num_subject, num_master, num_doctor, num_academician, num_library, num_lab, province_id, city_id, is_ads, is_recruitment,
+               create_date, area, old_name, is_fenxiao, status, short, us_rank, is_logo, num_master2, num_doctor2, ai_status, is_ads2, coop_money, gbh_num, email,
+               school_email, address, postcode, site, school_site, phone, content from school_details
+    </sql>
+
+    <select id="selectSchoolDetailsList" parameterType="com.ruoyi.gk.domain.SchoolDetails" resultMap="SchoolDetailsResult">
+        <include refid="selectSchoolDetailsVo"/>
+        <where>  
+            <if test="schoolId != null  and schoolId != ''"> and school_id = #{schoolId}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="numSubject != null  and numSubject != ''"> and num_subject = #{numSubject}</if>
+            <if test="numMaster != null  and numMaster != ''"> and num_master = #{numMaster}</if>
+            <if test="numDoctor != null  and numDoctor != ''"> and num_doctor = #{numDoctor}</if>
+            <if test="numAcademician != null  and numAcademician != ''"> and num_academician = #{numAcademician}</if>
+            <if test="numLibrary != null  and numLibrary != ''"> and num_library = #{numLibrary}</if>
+            <if test="numLab != null  and numLab != ''"> and num_lab = #{numLab}</if>
+            <if test="provinceId != null  and provinceId != ''"> and province_id = #{provinceId}</if>
+            <if test="cityId != null  and cityId != ''"> and city_id = #{cityId}</if>
+            <if test="isAds != null  and isAds != ''"> and is_ads = #{isAds}</if>
+            <if test="isRecruitment != null  and isRecruitment != ''"> and is_recruitment = #{isRecruitment}</if>
+            <if test="createDate != null  and createDate != ''"> and create_date = #{createDate}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="oldName != null  and oldName != ''"> and old_name like concat('%', #{oldName}, '%')</if>
+            <if test="isFenxiao != null  and isFenxiao != ''"> and is_fenxiao = #{isFenxiao}</if>
+            <if test="status != null  and status != ''"> and `status` = #{status}</if>
+            <if test="short != null  and short != ''"> and short = #{short}</if>
+            <if test="usRank != null  and usRank != ''"> and us_rank = #{usRank}</if>
+            <if test="isLogo != null  and isLogo != ''"> and is_logo = #{isLogo}</if>
+            <if test="numMaster2 != null  and numMaster2 != ''"> and num_master2 = #{numMaster2}</if>
+            <if test="numDoctor2 != null  and numDoctor2 != ''"> and num_doctor2 = #{numDoctor2}</if>
+            <if test="aiStatus != null  and aiStatus != ''"> and ai_status = #{aiStatus}</if>
+            <if test="isAds2 != null  and isAds2 != ''"> and is_ads2 = #{isAds2}</if>
+            <if test="coopMoney != null  and coopMoney != ''"> and coop_money = #{coopMoney}</if>
+            <if test="gbhNum != null  and gbhNum != ''"> and gbh_num = #{gbhNum}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="schoolEmail != null  and schoolEmail != ''"> and school_email = #{schoolEmail}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="postcode != null  and postcode != ''"> and postcode = #{postcode}</if>
+            <if test="site != null  and site != ''"> and site = #{site}</if>
+            <if test="schoolSite != null  and schoolSite != ''"> and school_site = #{schoolSite}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+        </where>
+    </select>
+    
+    <select id="selectSchoolDetailsById" parameterType="Long" resultMap="SchoolDetailsVo">
+        SELECT sd.*,rt.id,rt.school_id,rt.rank_type,rt.rank,sc.nature_name,sc.dual_class_name,sc.f211,sc.f985,sc.level_name
+                   ,sc.province_name,sc.city_name,sc.type_name,sc.belong
+        FROM school_details sd
+        LEFT JOIN school_rank_type rt
+        ON rt.school_id=sd.school_id
+        LEFT JOIN schools sc
+        ON sc.school_id=sd.school_id
+        WHERE sd.school_id =#{id};
+    </select>
+        
+    <insert id="insertSchoolDetails" parameterType="com.ruoyi.gk.domain.SchoolDetails" useGeneratedKeys="true" keyProperty="id">
+        insert into school_details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="schoolId != null">school_id,</if>
+            <if test="name != null">`name`,</if>
+            <if test="numSubject != null">num_subject,</if>
+            <if test="numMaster != null">num_master,</if>
+            <if test="numDoctor != null">num_doctor,</if>
+            <if test="numAcademician != null">num_academician,</if>
+            <if test="numLibrary != null">num_library,</if>
+            <if test="numLab != null">num_lab,</if>
+            <if test="provinceId != null">province_id,</if>
+            <if test="cityId != null">city_id,</if>
+            <if test="isAds != null">is_ads,</if>
+            <if test="isRecruitment != null">is_recruitment,</if>
+            <if test="createDate != null">create_date,</if>
+            <if test="area != null">area,</if>
+            <if test="oldName != null">old_name,</if>
+            <if test="isFenxiao != null">is_fenxiao,</if>
+            <if test="status != null">`status`,</if>
+            <if test="short != null">short,</if>
+            <if test="usRank != null">us_rank,</if>
+            <if test="isLogo != null">is_logo,</if>
+            <if test="numMaster2 != null">num_master2,</if>
+            <if test="numDoctor2 != null">num_doctor2,</if>
+            <if test="aiStatus != null">ai_status,</if>
+            <if test="isAds2 != null">is_ads2,</if>
+            <if test="coopMoney != null">coop_money,</if>
+            <if test="gbhNum != null">gbh_num,</if>
+            <if test="email != null">email,</if>
+            <if test="schoolEmail != null">school_email,</if>
+            <if test="address != null">address,</if>
+            <if test="postcode != null">postcode,</if>
+            <if test="site != null">site,</if>
+            <if test="schoolSite != null">school_site,</if>
+            <if test="phone != null">phone,</if>
+            <if test="content != null">content,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="schoolId != null">#{schoolId},</if>
+            <if test="name != null">#{name},</if>
+            <if test="numSubject != null">#{numSubject},</if>
+            <if test="numMaster != null">#{numMaster},</if>
+            <if test="numDoctor != null">#{numDoctor},</if>
+            <if test="numAcademician != null">#{numAcademician},</if>
+            <if test="numLibrary != null">#{numLibrary},</if>
+            <if test="numLab != null">#{numLab},</if>
+            <if test="provinceId != null">#{provinceId},</if>
+            <if test="cityId != null">#{cityId},</if>
+            <if test="isAds != null">#{isAds},</if>
+            <if test="isRecruitment != null">#{isRecruitment},</if>
+            <if test="createDate != null">#{createDate},</if>
+            <if test="area != null">#{area},</if>
+            <if test="oldName != null">#{oldName},</if>
+            <if test="isFenxiao != null">#{isFenxiao},</if>
+            <if test="status != null">#{status},</if>
+            <if test="short != null">#{short},</if>
+            <if test="usRank != null">#{usRank},</if>
+            <if test="isLogo != null">#{isLogo},</if>
+            <if test="numMaster2 != null">#{numMaster2},</if>
+            <if test="numDoctor2 != null">#{numDoctor2},</if>
+            <if test="aiStatus != null">#{aiStatus},</if>
+            <if test="isAds2 != null">#{isAds2},</if>
+            <if test="coopMoney != null">#{coopMoney},</if>
+            <if test="gbhNum != null">#{gbhNum},</if>
+            <if test="email != null">#{email},</if>
+            <if test="schoolEmail != null">#{schoolEmail},</if>
+            <if test="address != null">#{address},</if>
+            <if test="postcode != null">#{postcode},</if>
+            <if test="site != null">#{site},</if>
+            <if test="schoolSite != null">#{schoolSite},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="content != null">#{content},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSchoolDetails" parameterType="com.ruoyi.gk.domain.SchoolDetails">
+        update school_details
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="schoolId != null">school_id = #{schoolId},</if>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="numSubject != null">num_subject = #{numSubject},</if>
+            <if test="numMaster != null">num_master = #{numMaster},</if>
+            <if test="numDoctor != null">num_doctor = #{numDoctor},</if>
+            <if test="numAcademician != null">num_academician = #{numAcademician},</if>
+            <if test="numLibrary != null">num_library = #{numLibrary},</if>
+            <if test="numLab != null">num_lab = #{numLab},</if>
+            <if test="provinceId != null">province_id = #{provinceId},</if>
+            <if test="cityId != null">city_id = #{cityId},</if>
+            <if test="isAds != null">is_ads = #{isAds},</if>
+            <if test="isRecruitment != null">is_recruitment = #{isRecruitment},</if>
+            <if test="createDate != null">create_date = #{createDate},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="oldName != null">old_name = #{oldName},</if>
+            <if test="isFenxiao != null">is_fenxiao = #{isFenxiao},</if>
+            <if test="status != null">`status` = #{status},</if>
+            <if test="short != null">short = #{short},</if>
+            <if test="usRank != null">us_rank = #{usRank},</if>
+            <if test="isLogo != null">is_logo = #{isLogo},</if>
+            <if test="numMaster2 != null">num_master2 = #{numMaster2},</if>
+            <if test="numDoctor2 != null">num_doctor2 = #{numDoctor2},</if>
+            <if test="aiStatus != null">ai_status = #{aiStatus},</if>
+            <if test="isAds2 != null">is_ads2 = #{isAds2},</if>
+            <if test="coopMoney != null">coop_money = #{coopMoney},</if>
+            <if test="gbhNum != null">gbh_num = #{gbhNum},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="schoolEmail != null">school_email = #{schoolEmail},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="postcode != null">postcode = #{postcode},</if>
+            <if test="site != null">site = #{site},</if>
+            <if test="schoolSite != null">school_site = #{schoolSite},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="content != null">content = #{content},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSchoolDetailsById" parameterType="Long">
+        delete from school_details where id = #{id}
+    </delete>
+
+    <delete id="deleteSchoolDetailsByIds" parameterType="String">
+        delete from school_details where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

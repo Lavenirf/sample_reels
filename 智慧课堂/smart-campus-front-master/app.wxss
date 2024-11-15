@@ -1,0 +1,224 @@
+
+page {
+  width: 100vw;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', 'Microsoft Yahei', sans-serif;
+}
+
+view,
+image,
+text {
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.zhktsy-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.zhktsy-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.zhktsy-justify-start {
+  justify-content: flex-start;
+}
+
+.zhktsy-justify-end {
+  justify-content: flex-end;
+}
+
+.zhktsy-justify-center {
+  justify-content: center;
+}
+
+.zhktsy-justify-between {
+  justify-content: space-between;
+}
+
+.zhktsy-justify-around {
+  justify-content: space-around;
+}
+
+.zhktsy-justify-evenly {
+  justify-content: space-evenly;
+}
+
+.zhktsy-items-start {
+  align-items: flex-start;
+}
+
+.zhktsy-items-end {
+  align-items: flex-end;
+}
+
+.zhktsy-items-center {
+  align-items: center;
+}
+
+.zhktsy-items-baseline {
+  align-items: baseline;
+}
+
+.zhktsy-items-stretch {
+  align-items: stretch;
+}
+
+.zhktsy-self-start {
+  align-self: flex-start;
+}
+
+.zhktsy-self-end {
+  align-self: flex-end;
+}
+
+.zhktsy-self-center {
+  align-self: center;
+}
+
+.zhktsy-self-baseline {
+  align-self: baseline;
+}
+
+.zhktsy-self-stretch {
+  align-self: stretch;
+}
+
+.zhktsy-flex-1 {
+  flex: 1 1 0%;
+}
+
+.zhktsy-flex-auto {
+  flex: 1 1 auto;
+}
+
+.zhktsy-grow {
+  flex-grow: 1;
+}
+
+.zhktsy-grow-0 {
+  flex-grow: 0;
+}
+
+.zhktsy-shrink {
+  flex-shrink: 1;
+}
+
+.zhktsy-shrink-0 {
+  flex-shrink: 0;
+}
+
+.zhktsy-relative {
+  position: relative;
+}
+view,
+image,
+text {
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.zhktzyfb-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.zhktzyfb-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.zhktzyfb-justify-start {
+  justify-content: flex-start;
+}
+
+.zhktzyfb-justify-end {
+  justify-content: flex-end;
+}
+
+.zhktzyfb-justify-center {
+  justify-content: center;
+}
+
+.zhktzyfb-justify-between {
+  justify-content: space-between;
+}
+
+.zhktzyfb-justify-around {
+  justify-content: space-around;
+}
+
+.zhktzyfb-justify-evenly {
+  justify-content: space-evenly;
+}
+
+.zhktzyfb-items-start {
+  align-items: flex-start;
+}
+
+.zhktzyfb-items-end {
+  align-items: flex-end;
+}
+
+.zhktzyfb-items-center {
+  align-items: center;
+}
+
+.zhktzyfb-items-baseline {
+  align-items: baseline;
+}
+
+.zhktzyfb-items-stretch {
+  align-items: stretch;
+}
+
+.zhktzyfb-self-start {
+  align-self: flex-start;
+}
+
+.zhktzyfb-self-end {
+  align-self: flex-end;
+}
+
+.zhktzyfb-self-center {
+  align-self: center;
+}
+
+.zhktzyfb-self-baseline {
+  align-self: baseline;
+}
+
+.zhktzyfb-self-stretch {
+  align-self: stretch;
+}
+
+.zhktzyfb-flex-1 {
+  flex: 1 1 0%;
+}
+
+.zhktzyfb-flex-auto {
+  flex: 1 1 auto;
+}
+
+.zhktzyfb-grow {
+  flex-grow: 1;
+}
+
+.zhktzyfb-grow-0 {
+  flex-grow: 0;
+}
+
+.zhktzyfb-shrink {
+  flex-shrink: 1;
+}
+
+.zhktzyfb-shrink-0 {
+  flex-shrink: 0;
+}
+
+.zhktzyfb-relative {
+  position: relative;
+}

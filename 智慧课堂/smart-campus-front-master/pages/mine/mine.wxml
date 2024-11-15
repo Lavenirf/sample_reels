@@ -1,0 +1,6 @@
+<!--pages/mine/mine.wxml-->
+<view>
+  <view bindtap="toLogin">
+    <i-icon type="addressbook" size="28"/>
+  </view>
+</view>

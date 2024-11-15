@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/基于Security和Mq/My-Project/my-project-backend" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/基于权限、代码生成器等多种功能的后台管理系统/System/TestSystem" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/基于权限、代码生成器等多种功能的后台管理系统/System/vue" vcs="Git" />
+  </component>
+</project>

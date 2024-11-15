@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.core.mapper.ClazzRoomSeatMapper">
+
+    <resultMap type="com.core.entity.ClazzRoomSeat" id="ClazzRoomSeatResult">
+        <result property="id" column="id"/>
+        <result property="clazzRoomId" column="clazz_room_id"/>
+        <result property="num" column="num"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+        <result property="rowNum" column="row_num"/>
+        <result property="colNum" column="col_num"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <sql id="selectClazzRoomSeatVo">
+        select id, clazz_room_id, num, longitude, latitude, row_num, col_num, create_time from clazz_room_seat
+    </sql>
+
+    <select id="selectClazzRoomSeatList" parameterType="com.core.entity.ClazzRoomSeat" resultMap="ClazzRoomSeatResult">
+        <include refid="selectClazzRoomSeatVo"/>
+        <where>
+            <if test="clazzRoomId != null ">
+                and clazz_room_id = #{clazzRoomId}
+            </if>
+            <if test="num != null ">
+                and num = #{num}
+            </if>
+            <if test="longitude != null ">
+                and longitude = #{longitude}
+            </if>
+            <if test="latitude != null ">
+                and latitude = #{latitude}
+            </if>
+            <if test="rowNum != null ">
+                and row_num = #{rowNum}
+            </if>
+            <if test="colNum != null ">
+                and col_num = #{colNum}
+            </if>
+            <if test="createTime != null ">
+                and create_time = #{createTime}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectClazzRoomSeatById" parameterType="Long" resultMap="ClazzRoomSeatResult">
+        <include refid="selectClazzRoomSeatVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertClazzRoomSeat" parameterType="com.core.entity.ClazzRoomSeat">
+        insert into clazz_room_seat
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="clazzRoomId != null">
+                clazz_room_id,
+            </if>
+            <if test="num != null">
+                num,
+            </if>
+            <if test="longitude != null">
+                longitude,
+            </if>
+            <if test="latitude != null">
+                latitude,
+            </if>
+            <if test="rowNum != null">
+                row_num,
+            </if>
+            <if test="colNum != null">
+                col_num,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="clazzRoomId != null">
+                #{clazzRoomId},
+            </if>
+            <if test="num != null">
+                #{num},
+            </if>
+            <if test="longitude != null">
+                #{longitude},
+            </if>
+            <if test="latitude != null">
+                #{latitude},
+            </if>
+            <if test="rowNum != null">
+                #{rowNum},
+            </if>
+            <if test="colNum != null">
+                #{colNum},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateClazzRoomSeat" parameterType="com.core.entity.ClazzRoomSeat">
+        update clazz_room_seat
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="clazzRoomId != null">
+                clazz_room_id = #{clazzRoomId},
+            </if>
+            <if test="num != null">
+                num = #{num},
+            </if>
+            <if test="longitude != null">
+                longitude = #{longitude},
+            </if>
+            <if test="latitude != null">
+                latitude = #{latitude},
+            </if>
+            <if test="rowNum != null">
+                row_num = #{rowNum},
+            </if>
+            <if test="colNum != null">
+                col_num = #{colNum},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteClazzRoomSeatById" parameterType="Long">
+        delete from clazz_room_seat where id = #{id}
+    </delete>
+
+    <delete id="deleteClazzRoomSeatByIds" parameterType="String">
+        delete from clazz_room_seat where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

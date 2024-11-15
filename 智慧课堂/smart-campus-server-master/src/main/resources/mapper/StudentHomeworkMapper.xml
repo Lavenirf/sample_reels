@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.core.mapper.StudentHomeworkMapper">
+
+    <resultMap type="com.core.entity.StudentHomework" id="StudentHomeworkResult">
+        <result property="id" column="id"/>
+        <result property="studentId" column="student_id"/>
+        <result property="homeworkId" column="homework_id"/>
+        <result property="fileUrl" column="file_url"/>
+        <result property="uploadTime" column="upload_time"/>
+        <result property="score" column="score"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <sql id="selectStudentHomeworkVo">
+        select id, student_id, homework_id, file_url, upload_time, status, score, create_time from student_homework
+    </sql>
+
+    <select id="selectStudentHomeworkList" parameterType="com.core.entity.StudentHomework" resultMap="StudentHomeworkResult">
+        <include refid="selectStudentHomeworkVo"/>
+        <where>
+            <if test="studentId != null ">
+                and student_id = #{studentId}
+            </if>
+            <if test="homeworkId != null ">
+                and homework_id = #{homeworkId}
+            </if>
+            <if test="fileUrl != null  and fileUrl != ''">
+                and file_url = #{fileUrl}
+            </if>
+            <if test="uploadTime != null ">
+                and upload_time = #{uploadTime}
+            </if>
+            <if test="score != null ">
+                and score = #{score}
+            </if>
+            <if test="status != null ">
+                and status = #{status}
+            </if>
+            <if test="createTime != null ">
+                and create_time = #{createTime}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="selectStudentHomeworkById" parameterType="Long" resultMap="StudentHomeworkResult">
+        <include refid="selectStudentHomeworkVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertStudentHomework" parameterType="com.core.entity.StudentHomework" useGeneratedKeys="true" keyProperty="id">
+        insert into student_homework
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">
+                student_id,
+            </if>
+            <if test="homeworkId != null">
+                homework_id,
+            </if>
+            <if test="fileUrl != null">
+                file_url,
+            </if>
+            <if test="uploadTime != null">
+                upload_time,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+            <if test="status != null ">
+                status,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="studentId != null">
+                #{studentId},
+            </if>
+            <if test="homeworkId != null">
+                #{homeworkId},
+            </if>
+            <if test="fileUrl != null">
+                #{fileUrl},
+            </if>
+            <if test="uploadTime != null">
+                #{uploadTime},
+            </if>
+            <if test="score != null">
+                #{score},
+            </if>
+            <if test="status != null ">
+                #{status},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateStudentHomework" parameterType="com.core.entity.StudentHomework">
+        update student_homework
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="studentId != null">
+                student_id = #{studentId},
+            </if>
+            <if test="homeworkId != null">
+                homework_id = #{homeworkId},
+            </if>
+            <if test="fileUrl != null">
+                file_url = #{fileUrl},
+            </if>
+            <if test="uploadTime != null">
+                upload_time = #{uploadTime},
+            </if>
+            <if test="score != null">
+                score = #{score},
+            </if>
+            <if test="status != null ">
+                status = #{status}
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteStudentHomeworkById" parameterType="Long">
+        delete from student_homework where id = #{id}
+    </delete>
+
+    <delete id="deleteStudentHomeworkByIds" parameterType="String">
+        delete from student_homework where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "布置作业",
+  "navigationBarTextStyle": "black",
+  "navigationBarBackgroundColor": "#00c15c",
+  "usingComponents": {
+     "i-input": "/components/dist/input/index"
+    } 
+ 
+
+}

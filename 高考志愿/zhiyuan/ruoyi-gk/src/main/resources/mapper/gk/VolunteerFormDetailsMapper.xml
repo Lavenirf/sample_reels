@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.gk.mapper.VolunteerFormDetailsMapper">
+    
+    <resultMap type="com.ruoyi.gk.domain.VolunteerFormDetails" id="VolunteerFormDetailsResult">
+        <result property="id"    column="id"    />
+        <result property="specialId"    column="special_id"    />
+        <result property="schoolId"    column="school_id"    />
+        <result property="order"    column="order"    />
+        <result property="volunteerFromId" column="volunteer_from_id"/>
+        <result property="paragraph" column="paragraph"/>
+        <result property="glRatio" column="gl_ratio"/>
+        <result property="mcid" column="mcid"/>
+
+    </resultMap>
+    <resultMap type="com.ruoyi.gk.domain.vo.VolunteerFormDetailsVo" id="VolunteerFormDetailsVoResult">
+        <result property="id"    column="id"    />
+        <result property="specialId"    column="special_id"    />
+        <result property="schoolId"    column="school_id"    />
+        <result property="order"    column="order"    />
+        <result property="mcid"    column="mcid"    />
+        <result property="paragraph"    column="paragraph"    />
+        <result property="volunteerFromId" column="volunteer_from_id"/>
+        <result property="schoolName" column="name"/>
+        <result property="cityName" column="city_name"/>
+        <result property="typeName" column="type_name"/>
+        <result property="codeEnroll" column="code_enroll"/>
+        <result property="natureName" column="nature_name"/>
+        <result property="specialName" column="spname"/>
+        <result property="code" column="code"/>
+        <result property="limitYear" column="limit_year"/>
+        <result property="selAdv" column="sel_adv"/>
+        <result property="belong" column="belong"/>
+        <result property="dualClassName" column="dual_class_name"/>
+        <result property="f211" column="f211"/>
+        <result property="f985" column="f985"/>
+        <result property="tagName" column="tag_name"/>
+        <result property="glRatio" column="gl_ratio"/>
+    </resultMap>
+
+    <sql id="selectVolunteerFormDetailsVo">
+        select * from volunteer_form_details
+    </sql>
+
+    <select id="selectVolunteerFormDetailsList" parameterType="com.ruoyi.gk.domain.VolunteerFormDetails" resultMap="VolunteerFormDetailsResult">
+        <include refid="selectVolunteerFormDetailsVo"/>
+        <where>
+            <if test="specialId != null "> and special_id = #{specialId}</if>
+            <if test="schoolId != null "> and school_id = #{schoolId}</if>
+            <if test="order != null "> and `order` = #{order}</if>
+            <if test="volunteerFromId != null "> and volunteer_from_id = #{volunteerFromId}</if>
+            <if test="paragraph != null "> and paragraph = #{paragraph}</if>
+        </where>
+    </select>
+    <select id="selectVolunteerFormDetailsByVoId" parameterType="com.ruoyi.gk.domain.VolunteerFormDetails" resultMap="VolunteerFormDetailsResult">
+        SELECT
+           *
+        FROM
+            volunteer_form_details
+        WHERE
+            volunteer_from_id = #{voId}
+            and paragraph =#{paragraphId}
+        ORDER BY
+            `order`
+    </select>
+    
+    <select id="selectVolunteerFormDetailsByVo" parameterType="com.ruoyi.gk.domain.VolunteerFormDetails" resultMap="VolunteerFormDetailsVoResult">
+        SELECT
+        vo.*,
+        sc.`name`,
+        sc.city_name,
+        sc.type_name,
+        sc.nature_name,
+        sc.code_enroll,
+        sc.belong,
+        sc.dual_class_name,
+        sc.f211,
+        sc.f985,
+        sc.tag_name,
+        sp.`code`,
+        sp.limit_year,
+        sp.sel_adv,
+        smc.spname
+        FROM
+        volunteer_form_details vo
+        LEFT JOIN schools sc
+        ON sc.school_id = vo.school_id
+        LEFT JOIN special_all_details sp
+        ON sp.special_id=(SELECT sms.spe_id FROM school_major_scores sms WHERE sms.special_id = vo.special_id LIMIT 1)
+        LEFT JOIN school_major_scores smc
+        ON vo.mcid=smc.mcid
+        <where>
+            <trim prefixOverrides="and">
+                <if test="voId!=null">
+                    vo.volunteer_from_id = #{voId}
+                </if>
+                <if test="paragraphId!=null">
+                    and vo.paragraph =#{paragraphId}
+                </if>
+            </trim>
+        </where>
+        ORDER BY
+        `order`
+    </select>
+    <select id="selectVolunteerFormDetailsByOrder" resultMap="VolunteerFormDetailsResult">
+        <include refid="selectVolunteerFormDetailsVo"/>
+        where `order` = #{order}
+    </select>
+        
+    <insert id="insertVolunteerFormDetails" parameterType="com.ruoyi.gk.domain.VolunteerFormDetails" useGeneratedKeys="true" keyProperty="id">
+        insert into volunteer_form_details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="specialId != null">special_id,</if>
+            <if test="schoolId != null">school_id,</if>
+            <if test="order != null">`order`,</if>
+            <if test="volunteerFromId != null">volunteer_from_id,</if>
+            <if test="glRatio != null">gl_ratio,</if>
+            <if test="paragraph != null">paragraph,</if>
+            <if test="mcid != null">mcid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="specialId != null">#{specialId},</if>
+            <if test="schoolId != null">#{schoolId},</if>
+            <if test="order != null">#{order},</if>
+            <if test="volunteerFromId != null">#{volunteerFromId},</if>
+            <if test="glRatio != null">#{glRatio},</if>
+            <if test="paragraph != null">#{paragraph},</if>
+            <if test="mcid != null">#{mcid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateVolunteerFormDetails" parameterType="com.ruoyi.gk.domain.VolunteerFormDetails">
+        update volunteer_form_details
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="specialId != null">special_id = #{specialId},</if>
+            <if test="schoolId != null">school_id = #{schoolId},</if>
+            <if test="order != null">`order` = #{order},</if>
+            <if test="volunteerFromId != null">volunteer_from_id = #{volunteerFromId},</if>
+            <if test="mcid != null">mcid = #{mcid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteVolunteerFormDetailsById" parameterType="Long">
+        delete from volunteer_form_details where id = #{id}
+    </delete>
+
+</mapper>
