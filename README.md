@@ -15,7 +15,7 @@
 #### 技术栈: 
 
 - SpringBoot2 Vue3 Mysql Redis等
-- 链接：http://222.206.160.32/searchUniversity    账户：admin    密码：admin123
+- 链接：http://222.206.160.32   账户：admin    密码：admin123
 
 ### 智慧课堂
 
